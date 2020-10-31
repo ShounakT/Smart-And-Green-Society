@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.smartandgreensociety.HomeActivity;
+import com.example.smartandgreensociety.NoticeBoardActivity;
 import com.example.smartandgreensociety.R;
+import com.example.smartandgreensociety.UserProfileActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,14 +62,16 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 FirebaseUser user = fAuth.getCurrentUser();
                 Log.d("Login Confirm","User Logged In: " + user.getEmail());
                 if(user.getMetadata().getCreationTimestamp() == user.getMetadata().getLastSignInTimestamp()){
-                    Toast.makeText(getApplicationContext(),"Welcome New User!",Toast.LENGTH_SHORT)
+                    Toast.makeText(getApplicationContext(),"Welcome New User! Please complete profile.",Toast.LENGTH_LONG)
                             .show();
-                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                    //startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                    startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
                 }else{
                     Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                    this.finish();
                 }
-                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                this.finish();
+
             }else{
                 IdpResponse response = IdpResponse.fromResultIntent(data);
                 if(response == null){
