@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
-        <activity android:name="Authentication.LoginRegisterActivity"></activity>
+        <activity android:name=".NoticeBoardActivity"></activity>
+        <activity android:name=".UserProfileActivity" />
+
+        <activity android:name="Authentication.LoginRegisterActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
