@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:text="Yes" />
+
         </LinearLayout>
 
         <TextView
@@ -123,10 +124,12 @@
             android:inputType="text" />
 
         <TextView
+            android:id="@+id/tvSocietyId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Society ID:"
+            android:visibility="gone"
             android:textSize="24sp" />
 
         <EditText
@@ -134,6 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:visibility="gone"
             android:enabled="false"
             android:inputType="text" />
 
@@ -150,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
-            android:text="LogOut" />
+            android:text="Save" />
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"

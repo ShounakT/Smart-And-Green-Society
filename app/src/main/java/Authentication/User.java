@@ -1,13 +1,17 @@
 package Authentication;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     private String name;
     private String email;
     private String designation;
-    private Boolean isSecretary;
+
     private int phone;
-    private int societyId;
+    private String societyId;
+    Map<String,Object> userMap = new HashMap<>();
 
     public String getName() {
         return name;
@@ -33,14 +37,6 @@ public class User {
         this.designation = designation;
     }
 
-    public Boolean getSecretary() {
-        return isSecretary;
-    }
-
-    public void setSecretary(Boolean secretary) {
-        isSecretary = secretary;
-    }
-
     public int getPhone() {
         return phone;
     }
@@ -49,11 +45,22 @@ public class User {
         this.phone = phone;
     }
 
-    public int getSocietyId() {
+    public String getSocietyId() {
         return societyId;
     }
 
-    public void setSocietyId(int societyId) {
+    public void setSocietyId(String societyId) {
         this.societyId = societyId;
+    }
+
+    public Map toMapSecretary(String name,String email,String designation,int phone,String societyId){
+
+        userMap.put("name",name);
+        userMap.put("email",email);
+        userMap.put("designation",designation);
+        userMap.put("phone",phone);
+        userMap.put("societyId",societyId);
+
+        return userMap;
     }
 }

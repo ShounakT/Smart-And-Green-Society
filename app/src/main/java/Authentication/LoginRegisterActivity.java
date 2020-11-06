@@ -13,6 +13,7 @@ import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.NoticeBoardActivity;
 import com.example.smartandgreensociety.R;
 import com.example.smartandgreensociety.UserProfileActivity;
+import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,24 +36,26 @@ public class LoginRegisterActivity extends AppCompatActivity {
         btnLoginRegister = findViewById(R.id.btnLoginRegister);
         fAuth = FirebaseAuth.getInstance();
 
-        checkUserLogin();
-        btnLoginRegister.setOnClickListener(v -> {
-            List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build());
+        //checkUserLogin();
+        List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build());
 
-            Intent intent = AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(provider).build();
-            startActivityForResult(intent,AuthUI_Req_Code);
-        });
+        AuthMethodPickerLayout authMethodPickerLayout = new AuthMethodPickerLayout
+                .Builder(R.layout.activity_login_register)
+                .setEmailButtonId(R.id.btnLoginRegister)
+                .build();
+        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAuthMethodPickerLayout(authMethodPickerLayout)
+                .setAvailableProviders(provider).setIsSmartLockEnabled(false).build(),AuthUI_Req_Code);
+
 
     }
 
-    private void checkUserLogin(){
+   /* private void checkUserLogin(){
         if(fAuth.getCurrentUser() != null){
+            //User is logged in
             startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
             finish();
         }
-    }
+    }*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -60,7 +63,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         if(requestCode == AuthUI_Req_Code){
             if(resultCode == RESULT_OK){
                 FirebaseUser user = fAuth.getCurrentUser();
-                Log.d("Login Confirm","User Logged In: " + user.getEmail());
+
                 if(user.getMetadata().getCreationTimestamp() == user.getMetadata().getLastSignInTimestamp()){
                     Toast.makeText(getApplicationContext(),"Welcome New User! Please complete profile.",Toast.LENGTH_LONG)
                             .show();
@@ -77,7 +80,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 if(response == null){
                     Log.d("Login Error","User Cancelled");
                 }else{
-                    Log.e("Server Error",String.valueOf(response.getError()));
+                    Log.d("Server Error",String.valueOf(response.getError()));
                 }
             }
         }

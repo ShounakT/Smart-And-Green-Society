@@ -63,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void checkUserLogin(){
         if(fAuth.getCurrentUser() == null){
+            //User not logged in
             Toast.makeText(getApplicationContext(),"Please Login First!",Toast.LENGTH_SHORT)
                     .show();
             startActivity(new Intent(HomeActivity.this, LoginRegisterActivity.class));
