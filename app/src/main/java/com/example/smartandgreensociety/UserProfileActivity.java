@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -16,13 +14,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
-
 import java.util.Map;
 
-import Authentication.LoginRegisterActivity;
-import Authentication.User;
-import Database.DbOperations;
+import com.example.smartandgreensociety.Authentication.LoginRegisterActivity;
+import com.example.smartandgreensociety.Authentication.User;
+import com.example.smartandgreensociety.Database.DbOperations;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -55,8 +51,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
 
         //checkUserLogin();
-        if(fAuth.getCurrentUser().getMetadata().getCreationTimestamp() ==
-                fAuth.getCurrentUser().getMetadata().getLastSignInTimestamp()){
+        if(Globals.newUser){
             setNewUserProfile();
         }
         btnEdit.setOnClickListener(v -> {

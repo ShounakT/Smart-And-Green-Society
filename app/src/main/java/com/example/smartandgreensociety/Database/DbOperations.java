@@ -1,14 +1,11 @@
-package Database;
+package com.example.smartandgreensociety.Database;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.smartandgreensociety.Authentication.User;
+import com.example.smartandgreensociety.Globals;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -20,6 +17,30 @@ public class DbOperations {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
+    // Auth
+    public void userExists(String uid, final onUserExistsCallback onUserExistsCallback) {
+        db
+                .collection("Users")
+                .document(uid)
+                .get()
+                .addOnCompleteListener(task -> {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if (documentSnapshot.exists()) {
+                        Log.e("User", documentSnapshot.getData().toString());
+                        Globals.USER = documentSnapshot.toObject(User.class);
+
+                        Globals.USER.setUid(uid);
+                        if (onUserExistsCallback != null) {
+                            onUserExistsCallback.userExists(true);
+                        }
+                    } else {
+                        if (onUserExistsCallback != null) {
+                            onUserExistsCallback.userExists(false);
+                        }
+                    }
+                });
+    }
 
 
 
@@ -50,5 +71,13 @@ public class DbOperations {
     }
     public void updateExistingUser(){
 
+    }
+
+
+
+
+    // Auth
+    public interface onUserExistsCallback {
+        void userExists(boolean userExists);
     }
 }

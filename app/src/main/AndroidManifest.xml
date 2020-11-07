@@ -12,7 +12,7 @@
         <activity android:name=".NoticeBoardActivity"></activity>
         <activity android:name=".UserProfileActivity" />
 
-        <activity android:name="Authentication.LoginRegisterActivity" />
+        <activity android:name="com.example.smartandgreensociety.Authentication.LoginRegisterActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

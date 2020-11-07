@@ -1,16 +1,22 @@
-package Authentication;
+package com.example.smartandgreensociety.Authentication;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public class User implements Serializable {
 
     private String name;
     private String email;
     private String designation;
     private String phone;
     private String societyId;
+    private String uid;
+
     private Map<String,Object> userMap = new HashMap<>();
+
+    public User() {
+    }
 
     public String getName() {
         return name;
@@ -52,7 +58,15 @@ public class User {
         this.societyId = societyId;
     }
 
-    public Map toMapSecretary(String name,String email,String designation,String phone,String societyId){
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public Map toMapSecretary(String name, String email, String designation, String phone, String societyId){
 
         userMap.put("name",name);
         userMap.put("email",email);

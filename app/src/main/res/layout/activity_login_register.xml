@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="Authentication.LoginRegisterActivity">
+    tools:context="com.example.smartandgreensociety.Authentication.LoginRegisterActivity">
 
   <Button
       android:id="@+id/btnLoginRegister"
