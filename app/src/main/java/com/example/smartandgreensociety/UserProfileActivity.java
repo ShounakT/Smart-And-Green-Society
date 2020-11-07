@@ -29,7 +29,7 @@ public class UserProfileActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     Switch switchIsSecretary;
     Button btnLogout,btnSave,btnEdit;
-    TextView tvUserWelcome,tvSocietyId;
+    TextView tvUserWelcome,tvSocietyId,tvIsUserSecretary;
     EditText etUserName,etUserEmail,etUserPhone,etUserDesignation,etUserSocietyId;
     User user = new User();
     DbOperations dbOperations = new DbOperations();
@@ -38,12 +38,14 @@ public class UserProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
         fAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnLogout);
         btnSave = findViewById(R.id.btnSave);
         btnEdit = findViewById(R.id.btnUserProfileEdit);
         tvUserWelcome = findViewById(R.id.tvUserWelcome);
         tvSocietyId = findViewById(R.id.tvSocietyId);
+        tvIsUserSecretary = findViewById(R.id.tvIsUserSercretary);
         etUserEmail = findViewById(R.id.etUserEmail);
         etUserPhone = findViewById(R.id.etUserPhone);
         etUserName = findViewById(R.id.etUserName);
@@ -66,13 +68,17 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void updateExistingUserProfile(){
+
         btnSave.setOnClickListener(v -> {
             //dboperations.updateExistingUser()
         });
 
     }
+
     private void setNewUserProfile(){
+
         Toast.makeText(getApplicationContext(),"Please fill details properly!",Toast.LENGTH_SHORT).show();
+        btnEdit.setVisibility(View.GONE);
         btnSave.setVisibility(View.VISIBLE);
         etUserName.setEnabled(true);
         etUserEmail.setEnabled(true);
@@ -92,7 +98,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
         });
         btnSave.setOnClickListener(v -> {
-            Log.e("SecretaryAdded","in onclick!");
             if(TextUtils.isEmpty(etUserName.getText()) || TextUtils.isEmpty(etUserEmail.getText())
                     || TextUtils.isEmpty(etUserPhone.getText()) || TextUtils.isEmpty(etUserDesignation.getText())){
                 if(isSecretary){
@@ -102,31 +107,38 @@ public class UserProfileActivity extends AppCompatActivity {
                 }
                 Toast.makeText(getApplicationContext(),"Please Enter All Fields!",Toast.LENGTH_SHORT).show();
             }else{
-                Log.e("SecretaryAdded","in else");
                 user.setName(etUserName.getText().toString().trim());
                 user.setEmail(etUserEmail.getText().toString().trim());
-                user.setPhone(Integer.parseInt(etUserPhone.getText().toString().trim()));
+                user.setPhone(etUserPhone.getText().toString().trim());
                 user.setDesignation(etUserDesignation.getText().toString().trim());
+                String Uid = getIntent().getStringExtra("Uid");
                 if(isSecretary){
-                    Log.e("SecretaryAdded","in if");
                     user.setSocietyId(etUserSocietyId.getText().toString().trim());
                     Map mapOfSecretary = user.toMapSecretary(user.getName(),user.getEmail(),user.getDesignation(),user.getPhone(),user.getSocietyId());
-                    dbOperations.addNewUserAsSecretary(mapOfSecretary);
+                    dbOperations.addNewUserAsSecretary(mapOfSecretary,Uid);
+                    Toast.makeText(getApplicationContext(),"Profile Creation Successful!",Toast.LENGTH_SHORT).show();
+                }else{
+                    Map mapOfResident = user.toMapResident(user.getName(),user.getEmail(),user.getDesignation(),user.getPhone());
+                    dbOperations.addNewUserAsResident(mapOfResident,Uid);
+                    Toast.makeText(getApplicationContext(),"Profile Creation Successful!",Toast.LENGTH_SHORT).show();
                 }
-                //dboperations.addNewUser()
             }
+            etUserName.setEnabled(false);
+            etUserEmail.setEnabled(false);
+            etUserPhone.setEnabled(false);
+            etUserDesignation.setEnabled(false);
+            etUserSocietyId.setEnabled(false);
+            tvIsUserSecretary.setVisibility(View.GONE);
+            switchIsSecretary.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.VISIBLE);
+            startActivity(new Intent(UserProfileActivity.this,HomeActivity.class));
+            UserProfileActivity.this.finish();
         });
     }
-    /*private void checkUserLogin(){
-        if(fAuth.getCurrentUser() == null){
-            Toast.makeText(getApplicationContext(),"Please Login First!",Toast.LENGTH_SHORT)
-                    .show();
-            startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
-            finish();
-        }
-    }*/
+
 
     private void signOutUser(){
+
         fAuth.signOut();
         Toast.makeText(getApplicationContext(),"Successfully Logged Out!",Toast.LENGTH_SHORT)
                 .show();

@@ -36,7 +36,6 @@ public class LoginRegisterActivity extends AppCompatActivity {
         btnLoginRegister = findViewById(R.id.btnLoginRegister);
         fAuth = FirebaseAuth.getInstance();
 
-        //checkUserLogin();
         List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build());
 
         AuthMethodPickerLayout authMethodPickerLayout = new AuthMethodPickerLayout
@@ -45,36 +44,30 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 .build();
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAuthMethodPickerLayout(authMethodPickerLayout)
                 .setAvailableProviders(provider).setIsSmartLockEnabled(false).build(),AuthUI_Req_Code);
-
-
     }
 
-   /* private void checkUserLogin(){
-        if(fAuth.getCurrentUser() != null){
-            //User is logged in
-            startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
-            finish();
-        }
-    }*/
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         
         if(requestCode == AuthUI_Req_Code){
             if(resultCode == RESULT_OK){
+
                 FirebaseUser user = fAuth.getCurrentUser();
 
                 if(user.getMetadata().getCreationTimestamp() == user.getMetadata().getLastSignInTimestamp()){
                     Toast.makeText(getApplicationContext(),"Welcome New User! Please complete profile.",Toast.LENGTH_LONG)
                             .show();
-                    //startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                    startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                    intent.putExtra("Uid",user.getUid());
+                    startActivity(intent);
+                    this.finish();
                 }else{
                     Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                     this.finish();
                 }
-
             }else{
                 IdpResponse response = IdpResponse.fromResultIntent(data);
                 if(response == null){

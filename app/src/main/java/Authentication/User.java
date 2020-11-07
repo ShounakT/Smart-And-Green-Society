@@ -8,10 +8,9 @@ public class User {
     private String name;
     private String email;
     private String designation;
-
-    private int phone;
+    private String phone;
     private String societyId;
-    Map<String,Object> userMap = new HashMap<>();
+    private Map<String,Object> userMap = new HashMap<>();
 
     public String getName() {
         return name;
@@ -37,11 +36,11 @@ public class User {
         this.designation = designation;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -53,14 +52,22 @@ public class User {
         this.societyId = societyId;
     }
 
-    public Map toMapSecretary(String name,String email,String designation,int phone,String societyId){
+    public Map toMapSecretary(String name,String email,String designation,String phone,String societyId){
 
         userMap.put("name",name);
         userMap.put("email",email);
         userMap.put("designation",designation);
         userMap.put("phone",phone);
         userMap.put("societyId",societyId);
+        return userMap;
+    }
 
+    public Map toMapResident(String name,String email,String designation,String phone){
+
+        userMap.put("name",name);
+        userMap.put("email",email);
+        userMap.put("designation",designation);
+        userMap.put("phone",phone);
         return userMap;
     }
 }

@@ -14,12 +14,15 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import Authentication.LoginRegisterActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
     FirebaseAuth fAuth;
+    FirebaseUser firebaseUser;
+
 
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
@@ -36,23 +39,27 @@ public class HomeActivity extends AppCompatActivity {
 
         dl.addDrawerListener(t);
         t.syncState();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        checkUserLogin();
+        firebaseUser = fAuth.getCurrentUser();
+
+            checkUserLogin();
+
 
         nv.setNavigationItemSelectedListener(item -> {
 
             int id = item.getItemId();
             switch(id){
                 case R.id.profile:
-                    Toast.makeText(HomeActivity.this,"Profile Clicked!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this,"Welcome To Your Profile!",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),UserProfileActivity.class));
+                    this.finish();
                     break;
 
                 case R.id.noticeBoard:
                     Toast.makeText(HomeActivity.this,"Notice Board Clicked!",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),NoticeBoardActivity.class));
+                    this.finish();
                     break;
             }
             return false;
@@ -71,8 +78,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -81,4 +86,5 @@ public class HomeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
