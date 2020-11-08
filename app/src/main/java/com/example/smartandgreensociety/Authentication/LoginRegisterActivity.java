@@ -28,9 +28,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private static final int AuthUI_Req_Code = 47312;
     Button btnLoginRegister;
     FirebaseAuth fAuth;
-
     DbOperations db = new DbOperations();
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
@@ -55,10 +53,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         
         if(requestCode == AuthUI_Req_Code){
             if(resultCode == RESULT_OK){
-
                 FirebaseUser firebaseUser = fAuth.getCurrentUser();
-
-
                 db.userExists(firebaseUser.getUid(), new DbOperations.onUserExistsCallback() {
                     @Override
                     public void userExists(boolean userExists) {
@@ -68,13 +63,16 @@ public class LoginRegisterActivity extends AppCompatActivity {
                                     .show();
                             Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                             intent.putExtra("Uid",firebaseUser.getUid());
+                            Log.d("Uid ","Inside LoginRegister");
                             startActivity(intent);
                             LoginRegisterActivity.this.finish();
-                        } else {
-                            Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                            LoginRegisterActivity.this.finish();
+                        }else {
 
+                            Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            intent.putExtra("Uid",firebaseUser.getUid());
+                            startActivity(intent);
+                            LoginRegisterActivity.this.finish();
                         }
                     }
                 });
@@ -82,8 +80,11 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 IdpResponse response = IdpResponse.fromResultIntent(data);
                 if(response == null){
                     Log.d("Login Error","User Cancelled");
+                    Toast.makeText(getApplicationContext(),"Please Sign In!",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this,LoginRegisterActivity.class));
                 }else{
                     Log.d("Server Error",String.valueOf(response.getError()));
+                    Toast.makeText(getApplicationContext(),"Server Error Occurred! Try Again Later!",Toast.LENGTH_SHORT).show();
                 }
             }
         }

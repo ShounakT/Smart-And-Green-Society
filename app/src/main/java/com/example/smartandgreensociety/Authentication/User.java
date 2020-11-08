@@ -84,4 +84,23 @@ public class User implements Serializable {
         userMap.put("phone",phone);
         return userMap;
     }
+
+    public Map toMapUpdateResident(String name,String email,String designation,String phone){
+
+        userMap.put("name",name);
+        userMap.put("email",email);
+        userMap.put("designation",designation);
+        userMap.put("phone",phone);
+        return userMap;
+    }
+
+    public Map toMapUpdateSecretary(String name,String email,String designation,String phone, String societyId){
+
+        userMap.put("name",name);
+        userMap.put("email",email);
+        userMap.put("designation",designation);
+        userMap.put("phone",phone);
+        userMap.put("societyId",societyId);
+        return userMap;
+    }
 }

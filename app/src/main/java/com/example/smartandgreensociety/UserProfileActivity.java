@@ -1,10 +1,14 @@
 package com.example.smartandgreensociety;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,10 +23,12 @@ import java.util.Map;
 import com.example.smartandgreensociety.Authentication.LoginRegisterActivity;
 import com.example.smartandgreensociety.Authentication.User;
 import com.example.smartandgreensociety.Database.DbOperations;
+import com.google.firebase.auth.FirebaseUser;
 
 public class UserProfileActivity extends AppCompatActivity {
 
     FirebaseAuth fAuth;
+    FirebaseUser firebaseUser;
     Switch switchIsSecretary;
     Button btnLogout,btnSave,btnEdit;
     TextView tvUserWelcome,tvSocietyId,tvIsUserSecretary;
@@ -30,12 +36,22 @@ public class UserProfileActivity extends AppCompatActivity {
     User user = new User();
     DbOperations dbOperations = new DbOperations();
     Boolean isSecretary = false;
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        UserProfileActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
         fAuth = FirebaseAuth.getInstance();
+        firebaseUser = fAuth.getCurrentUser();
         btnLogout = findViewById(R.id.btnLogout);
         btnSave = findViewById(R.id.btnSave);
         btnEdit = findViewById(R.id.btnUserProfileEdit);
@@ -49,12 +65,29 @@ public class UserProfileActivity extends AppCompatActivity {
         etUserSocietyId = findViewById(R.id.etUserSocietyId);
         switchIsSecretary = findViewById(R.id.switchIsSecretary);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //checkUserLogin();
+        //checkNewUserLogin();
         if(Globals.newUser){
             setNewUserProfile();
+        }else{
+
+            tvUserWelcome.setText(firebaseUser.getDisplayName());
+            etUserName.setText(Globals.USER.getName());
+            etUserEmail.setText(Globals.USER.getEmail());
+            etUserPhone.setText(Globals.USER.getPhone());
+            etUserDesignation.setText(Globals.USER.getDesignation());
+            tvIsUserSecretary.setVisibility(View.GONE);
+            switchIsSecretary.setVisibility(View.GONE);
+            if(Globals.USER.getDesignation().equals("Secretary")){
+                tvSocietyId.setVisibility(View.VISIBLE);
+                etUserSocietyId.setVisibility(View.VISIBLE);
+                etUserSocietyId.setText(Globals.USER.getSocietyId());
+            }
+            btnEdit.setVisibility(View.VISIBLE);
         }
         btnEdit.setOnClickListener(v -> {
+
             updateExistingUserProfile();
         });
         btnLogout.setOnClickListener(v -> {
@@ -63,15 +96,41 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void updateExistingUserProfile(){
-
+        Toast.makeText(getApplicationContext(),"You can now edit your Profile!",Toast.LENGTH_LONG).show();
+        btnSave.setVisibility(View.VISIBLE);
+        etUserName.setEnabled(true);
+        etUserEmail.setEnabled(true);
+        etUserPhone.setEnabled(true);
+        etUserDesignation.setEnabled(true);
         btnSave.setOnClickListener(v -> {
             //dboperations.updateExistingUser()
+            if(TextUtils.isEmpty(etUserName.getText()) || TextUtils.isEmpty(etUserEmail.getText())
+                    || TextUtils.isEmpty(etUserPhone.getText()) || TextUtils.isEmpty(etUserDesignation.getText())){
+                Toast.makeText(getApplicationContext(),"Please Enter All Fields!",Toast.LENGTH_SHORT).show();
+            }else{
+                //String Uid = getIntent().getStringExtra("Uid");
+                user.setName(etUserName.getText().toString().trim());
+                user.setEmail(etUserEmail.getText().toString().trim());
+                user.setPhone(etUserPhone.getText().toString().trim());
+                user.setDesignation(etUserDesignation.getText().toString().trim());
+                if(Globals.USER.getDesignation().equals("Resident")) {
+                    Map toMap = user.toMapUpdateResident(user.getName(), user.getEmail(), user.getDesignation(), user.getPhone());
+                    dbOperations.updateExistingResident(toMap, firebaseUser.getUid());
+                    Toast.makeText(getApplicationContext(), "Profile Updated Successfully!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            etUserName.setEnabled(false);
+            etUserEmail.setEnabled(false);
+            etUserPhone.setEnabled(false);
+            etUserDesignation.setEnabled(false);
+            btnSave.setVisibility(View.GONE);
+            startActivity(new Intent(UserProfileActivity.this,HomeActivity.class));
+            UserProfileActivity.this.finish();
         });
-
     }
 
     private void setNewUserProfile(){
-
+        tvUserWelcome.setText(firebaseUser.getDisplayName());
         Toast.makeText(getApplicationContext(),"Please fill details properly!",Toast.LENGTH_SHORT).show();
         btnEdit.setVisibility(View.GONE);
         btnSave.setVisibility(View.VISIBLE);
@@ -117,6 +176,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     dbOperations.addNewUserAsResident(mapOfResident,Uid);
                     Toast.makeText(getApplicationContext(),"Profile Creation Successful!",Toast.LENGTH_SHORT).show();
                 }
+                Globals.newUser = false;
             }
             etUserName.setEnabled(false);
             etUserEmail.setEnabled(false);
@@ -138,6 +198,6 @@ public class UserProfileActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Successfully Logged Out!",Toast.LENGTH_SHORT)
                 .show();
         startActivity(new Intent(getApplicationContext(),LoginRegisterActivity.class));
-        this.finish();
+        UserProfileActivity.this.finish();
     }
 }
