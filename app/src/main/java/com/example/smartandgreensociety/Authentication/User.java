@@ -12,10 +12,20 @@ public class User implements Serializable {
     private String phone;
     private String societyId;
     private String uid;
+    // private String societyRef;
+    private boolean isSocietyJoined;
 
     private Map<String,Object> userMap = new HashMap<>();
 
     public User() {
+    }
+
+    public boolean isSocietyJoined() {
+        return isSocietyJoined;
+    }
+
+    public void setSocietyJoined(boolean societyJoined) {
+        isSocietyJoined = societyJoined;
     }
 
     public String getName() {

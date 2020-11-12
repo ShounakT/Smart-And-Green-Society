@@ -6,5 +6,6 @@ public class Globals {
 
     public static boolean newUser = false;
     public static User USER = null;
+    public static Society SOCIETY = null;
 
 }

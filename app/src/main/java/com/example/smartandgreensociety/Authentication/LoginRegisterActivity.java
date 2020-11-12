@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -28,24 +29,34 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private static final int AuthUI_Req_Code = 47312;
     Button btnLoginRegister;
     FirebaseAuth fAuth;
-    DbOperations db = new DbOperations();
+    DbOperations dbOperations = new DbOperations();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
 
+
         btnLoginRegister = findViewById(R.id.btnLoginRegister);
         fAuth = FirebaseAuth.getInstance();
-
         List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build());
 
-        AuthMethodPickerLayout authMethodPickerLayout = new AuthMethodPickerLayout
-                .Builder(R.layout.activity_login_register)
-                .setEmailButtonId(R.id.btnLoginRegister)
-                .build();
-        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAuthMethodPickerLayout(authMethodPickerLayout)
-                .setAvailableProviders(provider).setIsSmartLockEnabled(false).build(),AuthUI_Req_Code);
-    }
+        if(fAuth.getCurrentUser() == null) {
+            btnLoginRegister.setOnClickListener(v -> {
 
+                AuthMethodPickerLayout authMethodPickerLayout = new AuthMethodPickerLayout
+                        .Builder(R.layout.activity_login_register)
+                        .setEmailButtonId(R.id.btnLoginRegister)
+                        .build();
+                startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAuthMethodPickerLayout(authMethodPickerLayout)
+                        .setAvailableProviders(provider).setIsSmartLockEnabled(false).build(), AuthUI_Req_Code);
+            });
+        }else{
+            dbOperations.setExistingUser(fAuth.getCurrentUser().getUid());
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+            LoginRegisterActivity.this.finish();
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -53,27 +64,28 @@ public class LoginRegisterActivity extends AppCompatActivity {
         
         if(requestCode == AuthUI_Req_Code){
             if(resultCode == RESULT_OK){
+                Globals.USER = new User();
                 FirebaseUser firebaseUser = fAuth.getCurrentUser();
-                db.userExists(firebaseUser.getUid(), new DbOperations.onUserExistsCallback() {
-                    @Override
-                    public void userExists(boolean userExists) {
-                        Globals.newUser = !userExists;
-                        if (!userExists) {
-                            Toast.makeText(getApplicationContext(),"Welcome New User! Please complete profile.",Toast.LENGTH_LONG)
-                                    .show();
-                            Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-                            intent.putExtra("Uid",firebaseUser.getUid());
-                            Log.d("Uid ","Inside LoginRegister");
-                            startActivity(intent);
-                            LoginRegisterActivity.this.finish();
-                        }else {
+                dbOperations.userExists(firebaseUser.getUid(), userExists -> {
+                    Globals.newUser = !userExists;
+                    if (!userExists) {
 
-                            Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            intent.putExtra("Uid",firebaseUser.getUid());
-                            startActivity(intent);
-                            LoginRegisterActivity.this.finish();
-                        }
+                        Globals.USER.setUid(firebaseUser.getUid());
+                        Toast.makeText(getApplicationContext(),"Welcome New User! Please complete profile.",Toast.LENGTH_LONG)
+                                .show();
+                        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                        intent.putExtra("Uid",firebaseUser.getUid());
+                        //Log.d("Uid ","Inside LoginRegister");
+                        startActivity(intent);
+                        LoginRegisterActivity.this.finish();
+                    }else {
+                        dbOperations.setExistingUser(firebaseUser.getUid());
+                        Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        intent.putExtra("Uid",firebaseUser.getUid());
+                        startActivity(intent);
+                        LoginRegisterActivity.this.finish();
+
                     }
                 });
             }else{

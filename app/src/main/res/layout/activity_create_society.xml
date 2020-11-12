@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateSociety">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Society Name:"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
+        android:textSize="16dp"/>
+
+    <EditText
+        android:id="@+id/etSocietyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Society Code:"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
+        android:textSize="16dp"/>
+
+    <EditText
+        android:id="@+id/etSocietyCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"/>
+
+    <Button
+        android:id="@+id/btnCreateSociety"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        />
+
+</LinearLayout>

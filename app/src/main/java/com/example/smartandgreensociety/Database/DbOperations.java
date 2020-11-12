@@ -6,14 +6,19 @@ import androidx.annotation.NonNull;
 
 import com.example.smartandgreensociety.Authentication.User;
 import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.Society;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.net.Socket;
+import java.util.List;
 import java.util.Map;
 
 
@@ -84,8 +89,6 @@ public class DbOperations {
                     Log.d("SecretaryNotAdded","New Secretary Collection Not Added!");
                 });
     }
-
-
     public void addNewUserAsResident(Map mapOfResident, String Uid){
 
         db.collection("Users")
@@ -100,32 +103,22 @@ public class DbOperations {
 
     }
 
+    public void createNewSociety(Map societyMap){
 
-    public void updateExistingResident(Map toMap,String Uid){
-        Log.e("update","Inside dboperations update function");
-        db
-                .collection("Users")
-                .document(Uid)
-                .set(toMap)
-                .addOnSuccessListener(o -> {
-                    Log.d("UserUpdated","New User Collection Updated!");
-                })
-                .addOnFailureListener(e -> {
-                    Log.d("UserNotUpdated","New User Collection Not Updated!");
-                });
-    }
+        DocumentReference societyReference =
+                db
+                    .collection("Societies")
+                    .document();
 
-    public void updateExistingSecretary(Map toMap,String Uid){
-        Log.e("update","Inside dboperations update function");
-        db
-                .collection("Users")
-                .document(Uid)
-                .set(toMap)
-                .addOnSuccessListener(o -> {
-                    Log.d("UserUpdated","New User Collection Updated!");
-                })
-                .addOnFailureListener(e -> {
-                    Log.d("UserNotUpdated","New User Collection Not Updated!");
-                });
+        societyReference
+                    .set(societyMap)
+                    .addOnSuccessListener(aVoid -> {
+
+                        Log.d("Society Added","society created");
+                        Globals.SOCIETY.setSocietyId(societyReference.getId());
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.d("Society Not Added","society not created");
+                    });
     }
 }
