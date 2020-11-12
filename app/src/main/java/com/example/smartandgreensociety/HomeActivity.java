@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-    private DbOperations db = new DbOperations();
+    private DbOperations dbOperations = new DbOperations();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +46,9 @@ public class HomeActivity extends AppCompatActivity {
         TextView navUserName = (TextView)headerview.findViewById(R.id.navUserName);
         TextView navUserEmail = (TextView)headerview.findViewById(R.id.navUserEmail);
 
-
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -73,18 +71,24 @@ public class HomeActivity extends AppCompatActivity {
 
         ///////////////////////////////////////////////////////////////
 
-        if(firebaseUser != null){
 
+
+            if(Globals.USER == null){
+                Log.e("Globals not Set","Inside HomeActivity");
+            }
             navUserName.setText(firebaseUser.getDisplayName());
             navUserEmail.setText(firebaseUser.getEmail());
-        }
-        /*if(Globals.USER.getDesignation().equals("Secretary")){
-            btn_Create_A_Society.setVisibility(View.VISIBLE);
-            btn_Create_A_Society.setOnClickListener(v -> {
-                startActivity(new Intent(HomeActivity.this,CreateSociety.class));
-                this.finish();
-            });
-        }*/
+
+
+
+            if(Globals.USER.getDesignation().equals("Secretary")){
+                btn_Create_A_Society.setVisibility(View.VISIBLE);
+                btn_Create_A_Society.setOnClickListener(v -> {
+                    startActivity(new Intent(HomeActivity.this,CreateSociety.class));
+                    this.finish();
+                });
+            }
+
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.example.smartandgreensociety.Database.DbOperations;
 import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
+import com.example.smartandgreensociety.SP;
 import com.example.smartandgreensociety.UserProfileActivity;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
@@ -29,6 +30,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private static final int AuthUI_Req_Code = 47312;
     Button btnLoginRegister;
     FirebaseAuth fAuth;
+    FirebaseUser firebaseUser;
     DbOperations dbOperations = new DbOperations();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +40,30 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
         btnLoginRegister = findViewById(R.id.btnLoginRegister);
         fAuth = FirebaseAuth.getInstance();
-        List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build());
-
-        if(fAuth.getCurrentUser() == null) {
+        List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder()
+                .build());
+        FirebaseUser firebaseUser = fAuth.getCurrentUser();
+        if(firebaseUser == null) {
             btnLoginRegister.setOnClickListener(v -> {
 
                 AuthMethodPickerLayout authMethodPickerLayout = new AuthMethodPickerLayout
                         .Builder(R.layout.activity_login_register)
                         .setEmailButtonId(R.id.btnLoginRegister)
                         .build();
-                startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAuthMethodPickerLayout(authMethodPickerLayout)
-                        .setAvailableProviders(provider).setIsSmartLockEnabled(false).build(), AuthUI_Req_Code);
+                startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
+                        .setAuthMethodPickerLayout(authMethodPickerLayout)
+                        .setAvailableProviders(provider).setIsSmartLockEnabled(false)
+                        .build(), AuthUI_Req_Code);
             });
         }else{
-            dbOperations.setExistingUser(fAuth.getCurrentUser().getUid());
+            Globals.USER = new User();
+            Globals.USER.setUid(firebaseUser.getUid());
+            Globals.USER.setDesignation(SP.getSP(LoginRegisterActivity.this,"designation"));
+            dbOperations.setGlobalsUserFromCache(firebaseUser.getUid());
+            dbOperations.setExistingUser(firebaseUser.getUid());
+            if(Globals.USER == null){
+                Log.e("Globals Not SEt","inside loginreg else part");
+            }
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
             LoginRegisterActivity.this.finish();
@@ -65,7 +77,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         if(requestCode == AuthUI_Req_Code){
             if(resultCode == RESULT_OK){
                 Globals.USER = new User();
-                FirebaseUser firebaseUser = fAuth.getCurrentUser();
+                firebaseUser = fAuth.getCurrentUser();
                 dbOperations.userExists(firebaseUser.getUid(), userExists -> {
                     Globals.newUser = !userExists;
                     if (!userExists) {
@@ -75,17 +87,27 @@ public class LoginRegisterActivity extends AppCompatActivity {
                                 .show();
                         Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                         intent.putExtra("Uid",firebaseUser.getUid());
+                        dbOperations.setExistingUser(firebaseUser.getUid());
+                        if(Globals.USER == null){
+                            Log.e("Globals Set","Inside LoginRegNewUser"+Globals.USER.toString());
+                        }
                         //Log.d("Uid ","Inside LoginRegister");
                         startActivity(intent);
                         LoginRegisterActivity.this.finish();
                     }else {
                         dbOperations.setExistingUser(firebaseUser.getUid());
+                        if(Globals.USER == null){
+                            Log.e("Globals Set","Inside LoginRegRegUser"+Globals.USER.toString());
+                        }
                         Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         intent.putExtra("Uid",firebaseUser.getUid());
                         startActivity(intent);
                         LoginRegisterActivity.this.finish();
 
+                    }
+                    if(Globals.USER == null){
+                        Log.e("Globals Set","Inside HomeActivity");
                     }
                 });
             }else{

@@ -17,7 +17,7 @@ public class CreateSociety extends AppCompatActivity {
 
     Button btnCreateSociety;
     EditText etSocietyCode, etSocietyName;
-    DbOperations db = new DbOperations();
+    DbOperations dbOperations = new DbOperations();
     Society society = new Society();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +31,17 @@ public class CreateSociety extends AppCompatActivity {
         btnCreateSociety.setOnClickListener(v -> {
             if(TextUtils.isEmpty(etSocietyName.getText().toString().trim()) || TextUtils
                     .isEmpty(etSocietyCode.getText().toString().trim())){
-                Toast.makeText(getApplicationContext(),"Please enter all fields!",Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getApplicationContext(),"Please enter all fields!",
+                        Toast.LENGTH_SHORT).show();
+
             }else{
+
                 String societyName = etSocietyName.getText().toString().trim();
                 String societyCode = etSocietyCode.getText().toString().trim();
                 Map societyMap = society.toMap(societyName,societyCode);
-                db.createNewSociety(societyMap);
+                dbOperations.createNewSociety(societyMap);
+
             }
         });
 

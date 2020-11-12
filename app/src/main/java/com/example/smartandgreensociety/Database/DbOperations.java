@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.net.Socket;
 import java.util.List;
@@ -68,14 +69,44 @@ public class DbOperations {
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        Log.e("User","Get user from server complete");
                         DocumentSnapshot documentSnapshot = task.getResult();
                         if(documentSnapshot.exists()){
+                            Log.e("User","Got user from server");
+                            Log.e("User", documentSnapshot.getData().toString());
+                            Globals.USER = documentSnapshot.toObject(User.class);
+                            Globals.USER.setUid(uId);
+                            if(Globals.USER == null){
+                                Log.e("DB Ops Globals  not Set","Inside DBOperations");
+                            }
+                        }
+                    }
+                });
+    }
+    public void setGlobalsUserFromCache(String uId){
+        Log.e("User","Set global useer from cache called");
+        db
+                .collection("Users")
+                .document(uId)
+                .get(Source.CACHE)
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        Log.e("User","Get user from cache complete");
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if(documentSnapshot.exists()){
+                            Log.e("User","Got user in cache");
                             Log.e("User", documentSnapshot.getData().toString());
                             Globals.USER = documentSnapshot.toObject(User.class);
                             Globals.USER.setUid(uId);
                         }
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("User cache Fail: ", e.getMessage().toString());
+            }
+        });
     }
     public void addNewUserAsSecretary(Map mapOfSecretary, String Uid){
 
@@ -113,7 +144,6 @@ public class DbOperations {
         societyReference
                     .set(societyMap)
                     .addOnSuccessListener(aVoid -> {
-
                         Log.d("Society Added","society created");
                         Globals.SOCIETY.setSocietyId(societyReference.getId());
                     })

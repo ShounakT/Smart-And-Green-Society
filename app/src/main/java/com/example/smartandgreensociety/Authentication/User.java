@@ -76,22 +76,22 @@ public class User implements Serializable {
         this.uid = uid;
     }
 
-    public Map toMapSecretary(String name, String email, String designation, String phone, String societyId){
-
-        userMap.put("name",name);
-        userMap.put("email",email);
-        userMap.put("designation",designation);
-        userMap.put("phone",phone);
-        userMap.put("societyId",societyId);
+    public Map toMapSecretary(){
+//Run the app
+        userMap.put("name",this.name);
+        userMap.put("email",this.email);
+        userMap.put("designation",this.designation);
+        userMap.put("phone",this.phone);
+        userMap.put("societyId",this.societyId);
         return userMap;
     }
 
-    public Map toMapResident(String name,String email,String designation,String phone){
+    public Map toMapResident(){
 
-        userMap.put("name",name);
-        userMap.put("email",email);
-        userMap.put("designation",designation);
-        userMap.put("phone",phone);
+        userMap.put("name",this.name);
+        userMap.put("email",this.email);
+        userMap.put("designation",this.designation);
+        userMap.put("phone",this.phone);
         return userMap;
     }
 

@@ -36,7 +36,7 @@ public class UserProfileActivity extends AppCompatActivity {
     Boolean isSecretary = false;
     EditText etUserName,etUserEmail,etUserPhone,etUserDesignation,etUserSocietyId;
 
-    User user = new User();
+
     DbOperations dbOperations = new DbOperations();
 
     @Override
@@ -129,26 +129,28 @@ public class UserProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Please Enter All Fields!",
                         Toast.LENGTH_SHORT).show();
             }else{
-                user.setName(etUserName.getText().toString().trim());
-                user.setEmail(etUserEmail.getText().toString().trim());
-                user.setPhone(etUserPhone.getText().toString().trim());
-                user.setDesignation(etUserDesignation.getText().toString().trim());
+                Globals.USER.setName(etUserName.getText().toString().trim());
+                Globals.USER.setEmail(etUserEmail.getText().toString().trim());
+                Globals.USER.setPhone(etUserPhone.getText().toString().trim());
+                Globals.USER.setDesignation(etUserDesignation.getText().toString().trim());
                 String Uid = getIntent().getStringExtra("Uid");
                 if(isSecretary){
-                    user.setSocietyId(etUserSocietyId.getText().toString().trim());
-                    Map mapOfSecretary = user.toMapSecretary(user.getName(),user.getEmail(),
-                            user.getDesignation(),user.getPhone(),user.getSocietyId());
+                    SP.setSP(UserProfileActivity.this,"designation","Secretary");
+
+                    Globals.USER.setSocietyId(etUserSocietyId.getText().toString().trim());
+                    Map mapOfSecretary = Globals.USER.toMapSecretary();
                     dbOperations.addNewUserAsSecretary(mapOfSecretary,Uid);
                     Toast.makeText(getApplicationContext(),"Profile Creation Successful!",
                             Toast.LENGTH_SHORT).show();
                 }else{
-                    Map mapOfResident = user.toMapResident(user.getName(),user.getEmail(),
-                            user.getDesignation(),user.getPhone());
+                    SP.setSP(UserProfileActivity.this,"designation","Resident");
+                    Map mapOfResident = Globals.USER.toMapResident();
                     dbOperations.addNewUserAsResident(mapOfResident,Uid);
                     Toast.makeText(getApplicationContext(),"Profile Creation Successful!",
                             Toast.LENGTH_SHORT).show();
                 }
                 Globals.newUser = false;
+
             }
             etUserName.setEnabled(false);
             etUserEmail.setEnabled(false);
