@@ -7,7 +7,8 @@ public class SP {
     public static final String MY_PREFS_NAME = "SAGS";
 
     public static void setSP(Context context, String key, String value) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(MY_PREFS_NAME,
+                Context.MODE_PRIVATE).edit();
         editor.putString(key, value);
         editor.commit();
     }

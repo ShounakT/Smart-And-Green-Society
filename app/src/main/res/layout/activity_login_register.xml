@@ -7,12 +7,21 @@
     android:orientation="vertical"
     tools:context="com.example.smartandgreensociety.Authentication.LoginRegisterActivity">
 
+
+  <ProgressBar
+      android:id="@+id/loading"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="250dp" />
   <Button
       android:id="@+id/btnLoginRegister"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Login Or Register"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="400dp"/>
+      android:layout_gravity="center_horizontal|center_vertical"
+      android:layout_marginTop="150dp"
+      android:text="Login Or Register" />
+
+
 
   </LinearLayout>

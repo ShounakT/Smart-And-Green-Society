@@ -129,27 +129,33 @@ public class UserProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Please Enter All Fields!",
                         Toast.LENGTH_SHORT).show();
             }else{
-                Globals.USER.setName(etUserName.getText().toString().trim());
-                Globals.USER.setEmail(etUserEmail.getText().toString().trim());
-                Globals.USER.setPhone(etUserPhone.getText().toString().trim());
-                Globals.USER.setDesignation(etUserDesignation.getText().toString().trim());
-                String Uid = getIntent().getStringExtra("Uid");
-                if(isSecretary){
-                    SP.setSP(UserProfileActivity.this,"designation","Secretary");
 
-                    Globals.USER.setSocietyId(etUserSocietyId.getText().toString().trim());
-                    Map mapOfSecretary = Globals.USER.toMapSecretary();
-                    dbOperations.addNewUserAsSecretary(mapOfSecretary,Uid);
-                    Toast.makeText(getApplicationContext(),"Profile Creation Successful!",
-                            Toast.LENGTH_SHORT).show();
-                }else{
-                    SP.setSP(UserProfileActivity.this,"designation","Resident");
-                    Map mapOfResident = Globals.USER.toMapResident();
-                    dbOperations.addNewUserAsResident(mapOfResident,Uid);
-                    Toast.makeText(getApplicationContext(),"Profile Creation Successful!",
-                            Toast.LENGTH_SHORT).show();
-                }
-                Globals.newUser = false;
+                    Globals.USER.setName(etUserName.getText().toString().trim());
+                    Globals.USER.setEmail(etUserEmail.getText().toString().trim());
+                    Globals.USER.setPhone(etUserPhone.getText().toString().trim());
+                    Globals.USER.setDesignation(etUserDesignation.getText().toString().trim());
+                    String Uid = getIntent().getStringExtra("Uid");
+                    if(isSecretary){
+
+                        SP.setSP(getApplicationContext(),"designation",
+                                "Secretary");
+                        Globals.USER.setSocietyId(etUserSocietyId.getText().toString().trim());
+                        Map mapOfSecretary = Globals.USER.toMapSecretary();
+                        dbOperations.addNewUserAsSecretary(mapOfSecretary,Uid);
+                        Toast.makeText(getApplicationContext(),"Profile Creation Successful!",
+                                Toast.LENGTH_SHORT).show();
+
+                    }else{
+
+                        SP.setSP(getApplicationContext(),"designation",
+                                "Resident");
+                        Map mapOfResident = Globals.USER.toMapResident();
+                        dbOperations.addNewUserAsResident(mapOfResident,Uid);
+                        Toast.makeText(getApplicationContext(),"Profile Creation Successful!",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                    Globals.newUser = false;
 
             }
             etUserName.setEnabled(false);
@@ -160,10 +166,11 @@ public class UserProfileActivity extends AppCompatActivity {
             btnSave.setVisibility(View.GONE);
             tvIsUserSecretary.setVisibility(View.GONE);
             switchIsSecretary.setVisibility(View.GONE);
-            dbOperations.setExistingUser(firebaseUser.getUid());
+            dbOperations.setExistingUser(getApplicationContext(),firebaseUser.getUid());
             startActivity(new Intent(UserProfileActivity.this,HomeActivity.class));
             UserProfileActivity.this.finish();
         });
+
     }
 
     private void signOutUser(){

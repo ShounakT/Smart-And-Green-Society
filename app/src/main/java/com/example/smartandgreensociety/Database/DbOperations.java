@@ -1,12 +1,16 @@
 package com.example.smartandgreensociety.Database;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.smartandgreensociety.Authentication.User;
 import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.SP;
 import com.example.smartandgreensociety.Society;
+import com.example.smartandgreensociety.UserProfileActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,7 +49,7 @@ public class DbOperations {
                         if (onUserExistsCallback != null) {
                             onUserExistsCallback.userExists(true);
                         }
-                    } else {
+                    }else{
                         if (onUserExistsCallback != null) {
                             onUserExistsCallback.userExists(false);
                         }
@@ -59,7 +63,34 @@ public class DbOperations {
     }
 
 
-    public void setExistingUser(String uId){
+    public void setExistingUserFirstTime(Context context, String uId, final GotUserCallback GotUserCallback){
+        db
+                .collection("Users")
+                .document(uId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if(documentSnapshot.exists()){
+
+                            Globals.USER = documentSnapshot.toObject(User.class);
+                            SP.setSP(context,"designation",
+                                    Globals.USER.getDesignation());
+                            Globals.USER.setUid(uId);
+                            GotUserCallback.gotUser();
+
+                        }
+                    }
+                });
+    }
+
+    public interface GotUserCallback {
+        void gotUser();
+    }
+
+    public void setExistingUser(Context context,String uId){
         Log.e("Check","Inside Dboperartions setexitinguser");
         Log.d("uid inside dboperations",uId);
         db
@@ -75,6 +106,8 @@ public class DbOperations {
                             Log.e("User","Got user from server");
                             Log.e("User", documentSnapshot.getData().toString());
                             Globals.USER = documentSnapshot.toObject(User.class);
+                            SP.setSP(context,"designation",
+                                    Globals.USER.getDesignation());
                             Globals.USER.setUid(uId);
                             if(Globals.USER == null){
                                 Log.e("DB Ops Globals  not Set","Inside DBOperations");
@@ -115,6 +148,7 @@ public class DbOperations {
                 .set(mapOfSecretary)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("SecretaryAdded","New Secretary Collection Added!");
+
                 })
                 .addOnFailureListener(e -> {
                     Log.d("SecretaryNotAdded","New Secretary Collection Not Added!");
@@ -134,7 +168,7 @@ public class DbOperations {
 
     }
 
-    public void createNewSociety(Map societyMap){
+    public void createNewSociety(Context context, Map societyMap){
 
         DocumentReference societyReference =
                 db
@@ -144,11 +178,16 @@ public class DbOperations {
         societyReference
                     .set(societyMap)
                     .addOnSuccessListener(aVoid -> {
-                        Log.d("Society Added","society created");
+
                         Globals.SOCIETY.setSocietyId(societyReference.getId());
+                        Log.e("TAG","Society created with ID: "+ Globals.SOCIETY.getSocietyCode());
+                        Toast.makeText(context,"Society Created Successfully!",Toast.LENGTH_SHORT).show();
+
                     })
                     .addOnFailureListener(e -> {
                         Log.d("Society Not Added","society not created");
                     });
     }
+
+
 }

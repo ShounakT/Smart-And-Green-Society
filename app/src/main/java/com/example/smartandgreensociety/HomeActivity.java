@@ -78,10 +78,8 @@ public class HomeActivity extends AppCompatActivity {
             }
             navUserName.setText(firebaseUser.getDisplayName());
             navUserEmail.setText(firebaseUser.getEmail());
-
-
-
-            if(Globals.USER.getDesignation().equals("Secretary")){
+            Log.e("TAG","desigantion"+Globals.USER.getDesignation());
+            if(Globals.USER.getDesignation().equals("Secretary") && Globals.SOCIETY == null){
                 btn_Create_A_Society.setVisibility(View.VISIBLE);
                 btn_Create_A_Society.setOnClickListener(v -> {
                     startActivity(new Intent(HomeActivity.this,CreateSociety.class));

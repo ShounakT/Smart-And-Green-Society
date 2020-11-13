@@ -24,22 +24,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="24dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter Society Code:"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"
-        android:textSize="16dp"/>
 
-    <EditText
-        android:id="@+id/etSocietyCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"/>
 
     <Button
         android:id="@+id/btnCreateSociety"

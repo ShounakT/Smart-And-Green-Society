@@ -11,10 +11,21 @@ public class Society {
    private String societyId;//Firestoreid
    private String societyName;
    private String societyCode;//Secretary given
+
+
+
    private Map<String,Object> societyMap = new HashMap<>();
 
    public Society(){
 
+   }
+
+   public String getSocietyCode() {
+      return societyCode;
+   }
+
+   public void setSocietyCode(String societyCode) {
+      this.societyCode = societyCode;
    }
 
    public String getSocietyId() {
@@ -41,10 +52,10 @@ public class Society {
       this.societyCode = societyRef;
    }
 
-   public Map toMap(String societyName, String societyCode){
+   public Map toMap(){
 
-      societyMap.put("societyName",societyName);
-      societyMap.put("societyCode",societyCode);
+      societyMap.put("societyName",this.societyName);
+      societyMap.put("societyCode",this.societyCode);
       return societyMap;
 
    }
