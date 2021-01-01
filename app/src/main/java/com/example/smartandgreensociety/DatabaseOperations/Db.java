@@ -1,6 +1,7 @@
 package com.example.smartandgreensociety.DatabaseOperations;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class Db {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
+
     public interface NewUser{
 
         void isNewUserCallback(boolean isNewUser);
@@ -63,11 +65,33 @@ public class Db {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(context, "Registeration Successful!",Toast.LENGTH_SHORT).show();
+                        setUserDetailsGlobally(firebaseUser.getUid());
                     }
                 });
 
     }
 
+    public void setUserDetailsGlobally(String uId){
+
+        db
+                .collection("Users")
+                .document(uId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        Globals.user = new User();
+                        Globals.user.setUid(uId);
+                        Globals.user.setName(documentSnapshot.getString("name"));
+                        Globals.user.setEmail(documentSnapshot.getString("email"));
+                        Globals.user.setDesignation(documentSnapshot.getString("designation"));
+                        Globals.user.setPhone(documentSnapshot.getString("phone"));
+                        Globals.user.setSocietyRef(documentSnapshot.getString("societyRef"));
+                        Log.d("S",documentSnapshot.getString("name"));
+                    }
+                });
+    }
     public void createNewSociety(Map newSocietyMap){
 
 

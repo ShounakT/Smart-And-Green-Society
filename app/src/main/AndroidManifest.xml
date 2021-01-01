@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
-        <activity android:name=".SecretaryRegActivity"></activity>
+        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".NoticeBoardActivity" />
+        <activity android:name=".SecretaryRegActivity" />
         <activity android:name=".ResidentRegActivity" />
         <activity android:name=".ResSecActivity" />
         <activity android:name=".HomeActivity">
