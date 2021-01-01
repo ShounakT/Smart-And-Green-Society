@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.Authentication;
+package com.example.smartandgreensociety.UserAuth;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -10,22 +10,20 @@ public class User implements Serializable {
     private String email;
     private String designation;
     private String phone;
-    private String societyId;
     private String uid;
-    // private String societyRef;
-    private boolean isSocietyJoined;
+    private String societyRef; //firestore provided society id
 
     private Map<String,Object> userMap = new HashMap<>();
 
     public User() {
     }
 
-    public boolean isSocietyJoined() {
-        return isSocietyJoined;
+    public String getSocietyRef() {
+        return societyRef;
     }
 
-    public void setSocietyJoined(boolean societyJoined) {
-        isSocietyJoined = societyJoined;
+    public void setSocietyRef(String societyRef) {
+        this.societyRef = societyRef;
     }
 
     public String getName() {
@@ -60,13 +58,6 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getSocietyId() {
-        return societyId;
-    }
-
-    public void setSocietyId(String societyId) {
-        this.societyId = societyId;
-    }
 
     public String getUid() {
         return uid;
@@ -77,13 +68,14 @@ public class User implements Serializable {
     }
 
     public Map toMapSecretary(){
-//Run the app
+
         userMap.put("name",this.name);
         userMap.put("email",this.email);
         userMap.put("designation",this.designation);
         userMap.put("phone",this.phone);
-        userMap.put("societyId",this.societyId);
+        userMap.put("societyRef",this.societyRef);
         return userMap;
+
     }
 
     public Map toMapResident(){
@@ -92,25 +84,9 @@ public class User implements Serializable {
         userMap.put("email",this.email);
         userMap.put("designation",this.designation);
         userMap.put("phone",this.phone);
+        userMap.put("societyRef",this.societyRef);
         return userMap;
+
     }
 
-    public Map toMapUpdateResident(String name,String email,String designation,String phone){
-
-        userMap.put("name",name);
-        userMap.put("email",email);
-        userMap.put("designation",designation);
-        userMap.put("phone",phone);
-        return userMap;
-    }
-
-    public Map toMapUpdateSecretary(String name,String email,String designation,String phone, String societyId){
-
-        userMap.put("name",name);
-        userMap.put("email",email);
-        userMap.put("designation",designation);
-        userMap.put("phone",phone);
-        userMap.put("societyId",societyId);
-        return userMap;
-    }
 }

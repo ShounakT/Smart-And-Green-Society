@@ -1,11 +1,12 @@
 package com.example.smartandgreensociety;
 
-import com.example.smartandgreensociety.Authentication.User;
+import com.example.smartandgreensociety.UserAuth.Society;
+import com.example.smartandgreensociety.UserAuth.User;
 
 public class Globals {
 
     public static boolean newUser = false;
-    public static User USER = null;
-    public static Society SOCIETY = null;
+    public static User user;
+    public static Society society;
 
 }

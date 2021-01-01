@@ -5,20 +5,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to Home!"
-        android:textSize="16sp"/>
+    tools:context=".ResSecActivity">
 
     <Button
-        android:id="@+id/btnLogOut"
+        android:id="@+id/btnRegAsResident"
+        android:text="Register As Resident"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="140dp"
-        android:text="Logout"/>
+        android:layout_marginTop="250dp"/>
+
+    <Button
+        android:id="@+id/btnRegAsSecretary"
+        android:text="Register As Secretary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
 
 </LinearLayout>

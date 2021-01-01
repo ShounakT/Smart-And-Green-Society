@@ -9,18 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
-        <activity android:name=".CreateSociety"></activity>
-        <activity android:name=".NoticeBoardActivity" />
-        <activity android:name=".UserProfileActivity" />
-        <activity android:name=".Authentication.LoginRegisterActivity" >
+        <activity android:name=".SecretaryRegActivity"></activity>
+        <activity android:name=".ResidentRegActivity" />
+        <activity android:name=".ResSecActivity" />
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"/>
-
-
     </application>
+
 </manifest>

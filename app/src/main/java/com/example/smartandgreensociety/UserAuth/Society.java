@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety;
+package com.example.smartandgreensociety.UserAuth;
 
 
 
@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Society {
 
-   private String societyId;//Firestoreid
+   private String societyRef;//Firestore provided society id
    private String societyName;
    private String societyCode;//Secretary given
 
@@ -26,14 +26,6 @@ public class Society {
 
    public void setSocietyCode(String societyCode) {
       this.societyCode = societyCode;
-   }
-
-   public String getSocietyId() {
-      return societyId;
-   }
-
-   public void setSocietyId(String societyId) {
-      this.societyId = societyId;
    }
 
    public String getSocietyName() {

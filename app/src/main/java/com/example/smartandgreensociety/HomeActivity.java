@@ -1,101 +1,115 @@
 package com.example.smartandgreensociety;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.smartandgreensociety.Authentication.User;
-import com.example.smartandgreensociety.Database.DbOperations;
-import com.google.android.material.navigation.NavigationView;
+import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.UserAuth.User;
+import com.firebase.ui.auth.AuthMethodPickerLayout;
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import com.example.smartandgreensociety.Authentication.LoginRegisterActivity;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    FirebaseAuth fAuth = FirebaseAuth.getInstance();
-    FirebaseUser firebaseUser  = fAuth.getCurrentUser();
-    Button btn_Create_A_Society;
-    private DrawerLayout dl;
-    private ActionBarDrawerToggle t;
-    private NavigationView nv;
-    private DbOperations dbOperations = new DbOperations();
+    Button btnLogOut;
+    private static final int AuthUI_Req_Code = 47312;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser;
+    Db db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btn_Create_A_Society = findViewById(R.id.btn_Create_A_Society);
-        dl = (DrawerLayout) findViewById(R.id.act_home);
-        t = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
-        nv = findViewById(R.id.nv);
-        View headerview = nv.getHeaderView(0);
-        TextView navUserName = (TextView)headerview.findViewById(R.id.navUserName);
-        TextView navUserEmail = (TextView)headerview.findViewById(R.id.navUserEmail);
 
-        dl.addDrawerListener(t);
-        t.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        firebaseUser = firebaseAuth.getCurrentUser();
+        btnLogOut = findViewById(R.id.btnLogOut);
+        List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder()
+                .build());
 
-        nv.setNavigationItemSelectedListener(item -> {
+        if(firebaseUser == null) {
+            // User Is Not Registered OR Registered, But Not Signed In
+            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
+                    .setAvailableProviders(provider).setIsSmartLockEnabled(false)
+                    .build(), AuthUI_Req_Code);
+        }else{
+            //User Is Registered & Opened app
+            Toast.makeText(getApplicationContext(),"Welcome!",Toast.LENGTH_SHORT).show();
+        }
 
-            int id = item.getItemId();
-            switch(id){
-                case R.id.profile:
-                    Toast.makeText(HomeActivity.this,"Welcome To Your Profile!",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),UserProfileActivity.class));
-                    this.finish();
-                    break;
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                HomeActivity.this.finish();
 
-                case R.id.noticeBoard:
-                    Toast.makeText(HomeActivity.this,"Welcome To Notice Board!",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),NoticeBoardActivity.class));
-                    this.finish();
-                    break;
+                Toast.makeText(getApplicationContext(),"Successfully Logged Out!",
+                        Toast.LENGTH_SHORT).show();
+
             }
-            return false;
         });
-
-        ///////////////////////////////////////////////////////////////
-
-
-
-            if(Globals.USER == null){
-                Log.e("Globals not Set","Inside HomeActivity");
-            }
-            navUserName.setText(firebaseUser.getDisplayName());
-            navUserEmail.setText(firebaseUser.getEmail());
-            Log.e("TAG","desigantion"+Globals.USER.getDesignation());
-            if(Globals.USER.getDesignation().equals("Secretary") && Globals.SOCIETY == null){
-                btn_Create_A_Society.setVisibility(View.VISIBLE);
-                btn_Create_A_Society.setOnClickListener(v -> {
-                    startActivity(new Intent(HomeActivity.this,CreateSociety.class));
-                    this.finish();
-                });
-            }
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(t.onOptionsItemSelected(item)){
-            return true;
+        if(requestCode == AuthUI_Req_Code) {
+            if (resultCode == Activity.RESULT_OK) {
+                firebaseAuth = firebaseAuth.getInstance();
+                firebaseUser = firebaseAuth.getCurrentUser();
+                db = new Db();
+                db.isNewUserCallback(firebaseUser.getUid(), new Db.NewUser() {
+                    @Override
+                    public void isNewUserCallback(boolean isNewUser) {
+
+                        Globals.newUser = isNewUser;
+                        if (Globals.newUser) {
+
+                            Globals.newUser = false;
+                            HomeActivity.this.startActivity(new Intent(HomeActivity.this, ResSecActivity.class));
+                            HomeActivity.this.finish();
+                            Toast.makeText(HomeActivity.this.getApplicationContext(), "Please Complete Profile...",
+                                    Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            HomeActivity.this.startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                            HomeActivity.this.finish();
+                            Toast.makeText(HomeActivity.this.getApplicationContext(), "Welcome Back!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+
+                });
+            } else {
+                //Error Due Cancellation
+                IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
+                idpResponse.getError();
+                Toast.makeText(getApplicationContext(), "Something went wrong... Try again " +
+                        "later!", Toast.LENGTH_SHORT).show();
+            }
         }
-        return super.onOptionsItemSelected(item);
-    }
 
+    }
 }
