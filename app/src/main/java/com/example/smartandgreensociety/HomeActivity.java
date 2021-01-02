@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     private NavigationView nv;
 
     private static final int AuthUI_Req_Code = 47312;
+
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     Db db = new Db();
@@ -59,6 +61,8 @@ public class HomeActivity extends AppCompatActivity {
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         nv.setNavigationItemSelectedListener(item -> {
 
