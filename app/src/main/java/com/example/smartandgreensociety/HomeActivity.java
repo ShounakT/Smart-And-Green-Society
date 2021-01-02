@@ -38,19 +38,15 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
 
-    private static final int AuthUI_Req_Code = 47312;
-
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
-    Db db = new Db();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-        firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         dl = (DrawerLayout) findViewById(R.id.home_act);
         t = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
@@ -61,8 +57,6 @@ public class HomeActivity extends AppCompatActivity {
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -83,64 +77,8 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
         ////////////////////////////////////////////////////////////////////////////////////////
-        List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder()
-                .build());
-
-        if(firebaseUser == null) {
-            // User Is Not Registered OR Registered, But Not Signed In
-            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-                    .setAvailableProviders(provider).setIsSmartLockEnabled(false)
-                    .build(), AuthUI_Req_Code);
-        }else{
-            //User Is Registered & Opened app
-            db.setUserDetailsGlobally(firebaseUser.getUid());
-            navUserName.setText(firebaseUser.getDisplayName());
-            navUserEmail.setText(firebaseUser.getEmail());
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == AuthUI_Req_Code) {
-            if (resultCode == Activity.RESULT_OK) {
-                firebaseAuth = firebaseAuth.getInstance();
-                firebaseUser = firebaseAuth.getCurrentUser();
-                db = new Db();
-                db.isNewUserCallback(firebaseUser.getUid(), new Db.NewUser() {
-                    @Override
-                    public void isNewUserCallback(boolean isNewUser) {
-
-                        Globals.newUser = isNewUser;
-                        if (Globals.newUser) {
-
-                            Globals.newUser = false;
-                            HomeActivity.this.startActivity(new Intent(HomeActivity.this, ResSecActivity.class));
-                            HomeActivity.this.finish();
-                            Toast.makeText(HomeActivity.this.getApplicationContext(), "Register As A...",
-                                    Toast.LENGTH_SHORT).show();
-
-                        } else {
-
-
-                            HomeActivity.this.startActivity(new Intent(HomeActivity.this, HomeActivity.class));
-                            HomeActivity.this.finish();
-                            Toast.makeText(HomeActivity.this.getApplicationContext(), "Welcome Back!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-
-                });
-            } else {
-                //Error Due Cancellation
-                IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
-                idpResponse.getError();
-                Toast.makeText(getApplicationContext(), "Something went wrong... Try again " +
-                        "later!", Toast.LENGTH_SHORT).show();
-            }
-        }
+        navUserName.setText(firebaseUser.getDisplayName());
+        navUserEmail.setText(firebaseUser.getEmail());
 
     }
 

@@ -50,7 +50,7 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
                 UserProfileActivity.this.finish();
 
                 Toast.makeText(getApplicationContext(),"Successfully Logged Out!",
