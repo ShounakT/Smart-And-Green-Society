@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
-        <activity android:name=".LoginRegisterActivity"></activity>
+        <activity android:name=".UserAuth.LoginRegisterActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -21,9 +21,9 @@
         </activity>
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".NoticeBoardActivity" />
-        <activity android:name=".SecretaryRegActivity" />
-        <activity android:name=".ResidentRegActivity" />
-        <activity android:name=".ResSecActivity" />
+        <activity android:name=".UserAuth.SecretaryRegActivity" />
+        <activity android:name=".UserAuth.ResidentRegActivity" />
+        <activity android:name=".UserAuth.ResSecActivity" />
         <activity android:name=".HomeActivity"></activity>
     </application>
 

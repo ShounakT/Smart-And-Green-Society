@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResSecActivity">
+    tools:context=".UserAuth.ResSecActivity">
 
     <Button
         android:id="@+id/btnRegAsResident"
