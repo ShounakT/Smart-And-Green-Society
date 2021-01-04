@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.UserAuth.SP;
+import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,6 +58,12 @@ public class Db {
 
     public void createNewUser(Map newUserMap, Context context){
 
+        SP.setSP(context,"name",newUserMap.get("name").toString());
+        SP.setSP(context,"email",newUserMap.get("email").toString());
+        SP.setSP(context,"designation",newUserMap.get("designation").toString());
+        SP.setSP(context,"phone",newUserMap.get("phone").toString());
+        SP.setSP(context,"societyRef",newUserMap.get("societyRef").toString());
+
         firebaseUser = firebaseAuth.getCurrentUser();
         db
                 .collection("Users")
@@ -65,13 +73,14 @@ public class Db {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(context, "Registeration Successful!",Toast.LENGTH_SHORT).show();
-                        setUserDetailsGlobally(firebaseUser.getUid());
+                        setUserDetailsGlobally(firebaseUser.getUid(),context);
                     }
                 });
 
+
     }
 
-    public void setUserDetailsGlobally(String uId){
+    public void setUserDetailsGlobally(String uId,Context context){
 
         db
                 .collection("Users")
@@ -81,6 +90,11 @@ public class Db {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
+                        SP.setSP(context,"name",documentSnapshot.getString("name"));
+                        SP.setSP(context,"email",documentSnapshot.getString("email"));
+                        SP.setSP(context,"designation",documentSnapshot.getString("designation"));
+                        SP.setSP(context,"phone",documentSnapshot.getString("phone"));
+                        SP.setSP(context,"societyRef",documentSnapshot.getString("societyRef"));
                         Globals.user = new User();
                         Globals.user.setUid(uId);
                         Globals.user.setName(documentSnapshot.getString("name"));
@@ -92,19 +106,57 @@ public class Db {
                     }
                 });
     }
-    public void createNewSociety(Map newSocietyMap){
+    public void setSocietyDetailsGlobally(String sId){
 
+        db
+                .collection("Society")
+                .document(sId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        Globals.society = new Society();
+                        Globals.society.setSocietyRef(sId);
+                        Globals.society.setSocietyName(documentSnapshot.getString("societyName"));
+                    }
+                });
+    }
+
+    public void createNewSociety(Map newSocietyMap,Context context){
+
+        DocumentReference documentReference =
+        db
+                .collection("Societies")
+                .document();
+
+        documentReference
+                            .set(newSocietyMap)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    setSocietyDetailsGlobally(documentReference.getId());
+                                    addMemberInSociety(documentReference);
+                                }
+                            });
 
     }
 
-    public void addUserAsSecretary(){
+    public void addMemberInSociety(DocumentReference sId){
 
+
+        sId
+                .collection("Members")
+                .add(Globals.user.toMap())
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Globals.user.setSocietyRef(sId.getId());
+                    }
+                });
 
     }
 
-    public void addUserAsResident(){
 
-
-    }
 
 }

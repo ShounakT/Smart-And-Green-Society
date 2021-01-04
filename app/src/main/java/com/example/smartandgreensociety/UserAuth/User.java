@@ -88,5 +88,15 @@ public class User implements Serializable {
         return userMap;
 
     }
+    public Map toMap(){
+
+        userMap.put("name",this.name);
+        userMap.put("email",this.email);
+        userMap.put("designation",this.designation);
+        userMap.put("phone",this.phone);
+        userMap.put("societyRef",this.societyRef);
+        return userMap;
+
+    }
 
 }

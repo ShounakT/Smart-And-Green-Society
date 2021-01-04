@@ -42,7 +42,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     .build(), AuthUI_Req_Code);
         }else{
             //User Is Registered & Opened app
-            db.setUserDetailsGlobally(firebaseUser.getUid());
+            db.setUserDetailsGlobally(firebaseUser.getUid(),getApplicationContext());
             startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
             LoginRegisterActivity.this.finish();
         }
@@ -62,6 +62,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     public void isNewUserCallback(boolean isNewUser) {
 
                         Globals.newUser = isNewUser;
+                        //User is Not Registered
                         if (Globals.newUser) {
 
                             Globals.newUser = false;
@@ -69,10 +70,10 @@ public class LoginRegisterActivity extends AppCompatActivity {
                             LoginRegisterActivity.this.finish();
                             Toast.makeText(getApplicationContext(), "Register As A...",
                                     Toast.LENGTH_SHORT).show();
-
+                        //User is Registered
                         } else {
 
-                            db.setUserDetailsGlobally(firebaseUser.getUid());
+                            db.setUserDetailsGlobally(firebaseUser.getUid(),getApplicationContext());
                             startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
                             LoginRegisterActivity.this.finish();
                             Toast.makeText(getApplicationContext(), "Welcome Back!",

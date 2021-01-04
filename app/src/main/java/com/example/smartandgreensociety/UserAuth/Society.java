@@ -10,22 +10,10 @@ public class Society {
 
    private String societyRef;//Firestore provided society id
    private String societyName;
-   private String societyCode;//Secretary given
-
-
-
    private Map<String,Object> societyMap = new HashMap<>();
 
    public Society(){
 
-   }
-
-   public String getSocietyCode() {
-      return societyCode;
-   }
-
-   public void setSocietyCode(String societyCode) {
-      this.societyCode = societyCode;
    }
 
    public String getSocietyName() {
@@ -37,17 +25,17 @@ public class Society {
    }
 
    public String getSocietyRef() {
-      return societyCode;
+      return societyRef;
    }
 
    public void setSocietyRef(String societyRef) {
-      this.societyCode = societyRef;
+      this.societyRef = societyRef;
    }
 
-   public Map toMap(){
+   public Map toMapSociety(){
 
       societyMap.put("societyName",this.societyName);
-      societyMap.put("societyCode",this.societyCode);
+      societyMap.put("societyRef",this.societyRef);
       return societyMap;
 
    }

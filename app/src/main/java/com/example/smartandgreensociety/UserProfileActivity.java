@@ -20,7 +20,6 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView tvUserName, tvUserEmail, tvUserDesignation, tvUserPhone, tvSocietyId;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
-    Db db = new Db();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
