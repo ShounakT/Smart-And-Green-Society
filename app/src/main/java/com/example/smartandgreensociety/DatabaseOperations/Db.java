@@ -57,14 +57,13 @@ public class Db {
     }
 
     public void createNewUser(Map newUserMap, Context context){
-
+        firebaseUser = firebaseAuth.getCurrentUser();
         SP.setSP(context,"name",newUserMap.get("name").toString());
         SP.setSP(context,"email",newUserMap.get("email").toString());
         SP.setSP(context,"designation",newUserMap.get("designation").toString());
         SP.setSP(context,"phone",newUserMap.get("phone").toString());
-        SP.setSP(context,"societyRef",newUserMap.get("societyRef").toString());
+        setUserDetailsGlobally(firebaseUser.getUid(),context);
 
-        firebaseUser = firebaseAuth.getCurrentUser();
         db
                 .collection("Users")
                 .document(firebaseUser.getUid())
@@ -73,7 +72,7 @@ public class Db {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(context, "Registeration Successful!",Toast.LENGTH_SHORT).show();
-                        setUserDetailsGlobally(firebaseUser.getUid(),context);
+
                     }
                 });
 
@@ -102,14 +101,13 @@ public class Db {
                         Globals.user.setDesignation(documentSnapshot.getString("designation"));
                         Globals.user.setPhone(documentSnapshot.getString("phone"));
                         Globals.user.setSocietyRef(documentSnapshot.getString("societyRef"));
-                        Log.d("S",documentSnapshot.getString("name"));
                     }
                 });
     }
     public void setSocietyDetailsGlobally(String sId){
 
         db
-                .collection("Society")
+                .collection("Societies")
                 .document(sId)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -129,34 +127,52 @@ public class Db {
         db
                 .collection("Societies")
                 .document();
-
+        setSocietyDetailsGlobally(documentReference.getId());
         documentReference
                             .set(newSocietyMap)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    setSocietyDetailsGlobally(documentReference.getId());
-                                    addMemberInSociety(documentReference);
+
+                                    addMemberInSociety(documentReference,context);
+                                    updateSocietyDetails(documentReference);
                                 }
                             });
 
     }
 
-    public void addMemberInSociety(DocumentReference sId){
+    private void updateSocietyDetails(DocumentReference documentReference) {
+        Map societyMap = Globals.society.toMapSociety();
 
+        documentReference
 
+                .update(societyMap);
+    }
+
+    public void addMemberInSociety(DocumentReference sId,Context context){
+
+        SP.setSP(context,"societyRef",sId.getId());
+        Globals.user.setSocietyRef(sId.getId());
+        updateUserDetails();
         sId
                 .collection("Members")
                 .add(Globals.user.toMap())
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Globals.user.setSocietyRef(sId.getId());
+
+
                     }
                 });
-
     }
 
+    private void updateUserDetails() {
 
+        Map userMap = Globals.user.toMap();
 
+        db
+                .collection("Users")
+                .document(firebaseUser.getUid())
+                .update(userMap);
+    }
 }

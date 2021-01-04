@@ -49,22 +49,16 @@ public class HomeActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
-    Button btnCreateSociety;
-    Society society;
     Db db = new Db();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseUser = firebaseAuth.getCurrentUser();
-        db.setUserDetailsGlobally(firebaseUser.getUid(),getApplicationContext());
         setContentView(R.layout.activity_home);
 
 
-        btnCreateSociety = findViewById(R.id.btnCreateSociety);
-
-        dl = findViewById(R.id.home_act);
+        dl = (DrawerLayout) findViewById(R.id.home_act);
         t = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
         nv = findViewById(R.id.nav_view);
         View headerview = nv.getHeaderView(0);
@@ -73,6 +67,8 @@ public class HomeActivity extends AppCompatActivity {
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -96,33 +92,11 @@ public class HomeActivity extends AppCompatActivity {
         navUserName.setText(firebaseUser.getDisplayName());
         navUserEmail.setText(firebaseUser.getEmail());
 
-        if(SP.getSP(getApplicationContext(),"designation").equals("Secretary")){
 
-            btnCreateSociety.setVisibility(View.VISIBLE);
 
-        }
 
-        btnCreateSociety.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-                ViewGroup viewGroup = findViewById(android.R.id.content);
-                View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.create_society_dialog, viewGroup, false);
-                builder.setTitle("Create A Society");
-                builder.setMessage("Enter society name:");
-                builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        society = new Society();
-                        EditText etSocietyName= dialogView.findViewById(R.id.etSocietyName);
-                        String societyName = etSocietyName.getText().toString().trim();
-                        society.setSocietyName(societyName);
-                        Map societyMap = society.toMapSociety();
-                        db.createNewSociety(societyMap,getApplicationContext());
-                    }
-                });
-            }
-        });
+
+
 
     }
 

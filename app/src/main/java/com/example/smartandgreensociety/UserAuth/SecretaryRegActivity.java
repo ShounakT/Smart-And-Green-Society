@@ -18,25 +18,30 @@ import java.util.Map;
 
 public class SecretaryRegActivity extends AppCompatActivity {
 
-    EditText userPhone,societyName;
+    EditText userPhone,etSocietyName;
     Button btnRegister;
+    Db db = new  Db();
+    User user = new User();
+    Society society = new Society();
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secretary_reg);
 
         userPhone = findViewById(R.id.userPhone);
-        societyName = findViewById(R.id.societyName);
+        etSocietyName = findViewById(R.id.etsocietyName);
         btnRegister = findViewById(R.id.btnSaveSecretary);
-        Db db = new  Db();
-        User user = new User();
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String societyName = etSocietyName.getText().toString().trim();
+                society.setSocietyName(societyName);
                 user.setName(firebaseUser.getDisplayName());
                 user.setDesignation("Secretary");
                 user.setEmail(firebaseUser.getEmail());
@@ -45,6 +50,10 @@ public class SecretaryRegActivity extends AppCompatActivity {
 
                 Map userMap = user.toMapSecretary();
                 db.createNewUser(userMap, getApplicationContext());
+
+                Map societyMap = society.toMapSociety();
+                db.createNewSociety(societyMap,getApplicationContext());
+
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 SecretaryRegActivity.this.finish();
 
