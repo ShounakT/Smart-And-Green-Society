@@ -7,9 +7,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.Poll;
 import com.example.smartandgreensociety.UserAuth.SP;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -17,13 +19,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Db {
+
+    static final String pollsSubCollection = "Poll";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -209,5 +216,33 @@ public class Db {
                 .add(residentMap);
     }
 
+    public void createPoll(String ques, List<String> options){
+        HashMap<String,Integer> pollCounts = new HashMap<>();
+
+        for (String opt : options){
+            pollCounts.put(opt,0);
+        }
+
+        HashMap<String,Object> poll = new HashMap<>();
+        poll.put("question",ques);
+        poll.put("options",pollCounts);
+
+        db.collection("Socities").document(Globals.society.getSocietyRef())
+                .collection(pollsSubCollection)
+                .add(poll);
+    }
+
+    public void voteInPoll(String pollId, String option){
+        db.collection("Socities").document(Globals.society.getSocietyRef())
+                .collection(pollsSubCollection)
+                .document(pollId)
+                .update("options."+option, FieldValue.increment(1));
+    }
+
+    public FirestoreRecyclerOptions<Poll> getPollsRecyclerOptions(){
+        return new FirestoreRecyclerOptions.Builder<Poll>()
+                    .setQuery(db.collection("Socities").document(Globals.society.getSocietyRef()).collection("Polls"), Poll.class)
+                    .build();
+    }
 
 }

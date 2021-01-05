@@ -37,6 +37,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -106,13 +107,21 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.createpoll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String ques = "Python is better than java";
+                List<String> options = new ArrayList<>();
 
+                options.add("Yes");
+                options.add("No");
 
-
-
-
-
+                db.createPoll(ques,options);
+            }
+        });
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -8,5 +8,6 @@ public class Globals {
     public static boolean newUser = false;
     public static User user;
     public static Society society;
+    public static Poll poll;
 
 }

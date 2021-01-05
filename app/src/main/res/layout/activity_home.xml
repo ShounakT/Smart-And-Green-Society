@@ -28,7 +28,17 @@
             android:layout_marginEnd="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/createpoll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Poll"/>
+
+
     </LinearLayout>
+
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
