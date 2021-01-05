@@ -9,6 +9,7 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
+        <activity android:name=".AddResidentsActivity"></activity>
         <activity android:name=".UserAuth.LoginRegisterActivity" />
         <activity
             android:name=".SplashActivity"

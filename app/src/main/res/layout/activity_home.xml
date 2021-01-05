@@ -21,8 +21,8 @@
 
         <Button
             android:visibility="gone"
-            android:id="@+id/btnCreateSociety"
-            android:text="Create Society"
+            android:id="@+id/btnAddResidents"
+            android:text="Add Residents"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"

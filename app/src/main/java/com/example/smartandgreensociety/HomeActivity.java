@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     Db db = new Db();
+    Button btnAddResidents;
 
 
     @Override
@@ -69,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         firebaseUser = firebaseAuth.getCurrentUser();
+        btnAddResidents = findViewById(R.id.btnAddResidents);
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -91,6 +93,18 @@ public class HomeActivity extends AppCompatActivity {
         ////////////////////////////////////////////////////////////////////////////////////////
         navUserName.setText(firebaseUser.getDisplayName());
         navUserEmail.setText(firebaseUser.getEmail());
+
+        if(SP.getSP(getApplicationContext(),"designation").equals("Secretary")){
+            btnAddResidents.setVisibility(View.VISIBLE);
+        }
+
+        btnAddResidents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, AddResidentsActivity.class));
+                HomeActivity.this.finish();
+            }
+        });
 
 
 

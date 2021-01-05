@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
@@ -175,4 +177,37 @@ public class Db {
                 .document(firebaseUser.getUid())
                 .update(userMap);
     }
+
+    public void addResident(String emailId){
+
+
+        db
+                .collection("Users")
+                .whereEqualTo("email",emailId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        DocumentSnapshot userDocSnap = queryDocumentSnapshots.getDocuments().get(0);
+                        User user=userDocSnap.toObject(User.class);
+                        userDocSnap.getReference().update("societyRef",Globals.society.getSocietyRef());
+                        Map userMap = user.toMap();
+                        addOtherMemberInSociety(userMap);
+                    }
+                });
+    }
+
+    private void addOtherMemberInSociety(Map residentMap) {
+
+        DocumentReference documentReference =
+        db
+                .collection("Societies")
+                .document(Globals.society.getSocietyRef());
+
+        documentReference
+                .collection("Members")
+                .add(residentMap);
+    }
+
+
 }
