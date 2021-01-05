@@ -119,6 +119,13 @@ public class HomeActivity extends AppCompatActivity {
                 db.createPoll(ques,options);
             }
         });
+
+        findViewById(R.id.viewpolls).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,PollsActivity.class));
+            }
+        });
     }
 
 

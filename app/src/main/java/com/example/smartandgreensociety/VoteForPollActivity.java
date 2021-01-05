@@ -19,7 +19,7 @@ public class VoteForPollActivity extends AppCompatActivity {
 
         Poll poll = Globals.poll;
 
-        ((TextView)findViewById(R.id.ques)).setText(poll.getQues());
+        ((TextView)findViewById(R.id.ques)).setText(poll.getQuestion());
 
         findViewById(R.id.yes).setOnClickListener(new View.OnClickListener() {
             @Override

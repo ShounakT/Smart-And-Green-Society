@@ -30,11 +30,13 @@ import java.util.Map;
 
 public class Db {
 
-    static final String pollsSubCollection = "Poll";
+    static final String pollsSubCollection = "Polls";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
+
+    String hardCodedSocietyRef = "G6WCJXLH90iJdaXdw6Un";
 
     public interface NewUser{
 
@@ -227,13 +229,13 @@ public class Db {
         poll.put("question",ques);
         poll.put("options",pollCounts);
 
-        db.collection("Socities").document(Globals.society.getSocietyRef())
+        db.collection("Societies").document(hardCodedSocietyRef)
                 .collection(pollsSubCollection)
                 .add(poll);
     }
 
     public void voteInPoll(String pollId, String option){
-        db.collection("Socities").document(Globals.society.getSocietyRef())
+        db.collection("Societies").document(hardCodedSocietyRef)
                 .collection(pollsSubCollection)
                 .document(pollId)
                 .update("options."+option, FieldValue.increment(1));
@@ -241,8 +243,21 @@ public class Db {
 
     public FirestoreRecyclerOptions<Poll> getPollsRecyclerOptions(){
         return new FirestoreRecyclerOptions.Builder<Poll>()
-                    .setQuery(db.collection("Socities").document(Globals.society.getSocietyRef()).collection("Polls"), Poll.class)
+                    .setQuery(db.collection("Societies").document(hardCodedSocietyRef).collection("Polls"), Poll.class)
                     .build();
+    }
+
+    public void test(){
+        db.collection("Societies").document(hardCodedSocietyRef).collection("Polls").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (!queryDocumentSnapshots.isEmpty()){
+                    Log.e("TAG","Not empty");
+                } else {
+                    Log.e("TAG","Empty");
+                }
+            }
+        });
     }
 
 }

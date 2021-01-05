@@ -1,12 +1,11 @@
 package com.example.smartandgreensociety;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Poll implements Serializable {
     String id;
-    String ques;
+    String question;
     Map<String,Integer> options; // Option : Count
 
     public Poll() {
@@ -20,12 +19,12 @@ public class Poll implements Serializable {
         this.id = id;
     }
 
-    public String getQues() {
-        return ques;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQues(String ques) {
-        this.ques = ques;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public Map<String, Integer> getOptions() {

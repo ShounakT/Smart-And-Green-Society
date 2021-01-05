@@ -1,6 +1,7 @@
 package com.example.smartandgreensociety;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -27,6 +28,8 @@ public class PollsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polls2);
+
+        db.test();
     }
 
     @Override
@@ -34,6 +37,8 @@ public class PollsActivity extends AppCompatActivity {
         super.onStart();
 
         FirestoreRecyclerOptions<Poll> option = db.getPollsRecyclerOptions();
+
+        ((RecyclerView)findViewById(R.id.polls)).setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         adapter = new FirestoreRecyclerAdapter<Poll, PollsActivity.PollHolder>(option) {
 
@@ -46,7 +51,7 @@ public class PollsActivity extends AppCompatActivity {
                 }
 
 
-                holder.pollQues.setText(model.getQues());
+                holder.pollQues.setText(model.getQuestion());
 
                 DocumentSnapshot snapshot = getSnapshots().getSnapshot(position);
 
@@ -87,6 +92,12 @@ public class PollsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         adapter.startListening();
         ((RecyclerView)findViewById(R.id.polls)).setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     public class PollHolder extends RecyclerView.ViewHolder {
