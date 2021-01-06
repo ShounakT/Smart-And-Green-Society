@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
-        <activity android:name=".VoteForPollActivity"></activity>
+        <activity android:name=".CreatePollActivity"></activity>
+        <activity android:name=".VoteForPollActivity" />
         <activity android:name=".PollsActivity" />
         <activity android:name=".AddResidentsActivity" />
         <activity android:name=".UserAuth.LoginRegisterActivity" />

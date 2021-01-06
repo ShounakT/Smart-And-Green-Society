@@ -2,6 +2,7 @@ package com.example.smartandgreensociety;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class VoteForPollActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db.voteInPoll(poll.getId(),"Yes");
+                startActivity(new Intent(VoteForPollActivity.this, HomeActivity.class));
+                VoteForPollActivity.this.finish();
             }
         });
 
@@ -32,6 +35,8 @@ public class VoteForPollActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db.voteInPoll(poll.getId(),"No");
+                startActivity(new Intent(VoteForPollActivity.this, HomeActivity.class));
+                VoteForPollActivity.this.finish();
             }
         });
     }

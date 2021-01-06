@@ -105,12 +105,12 @@ public class PollsActivity extends AppCompatActivity {
         RelativeLayout parent_layout;
         TextView pollQues;
 
-
         public PollHolder(View itemView) {
             super(itemView);
             parent_layout = itemView.findViewById(R.id.parent_layout);
             pollQues = itemView.findViewById(R.id.pollQues);
 
         }
+
     }
 }

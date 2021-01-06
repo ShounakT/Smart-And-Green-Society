@@ -36,8 +36,6 @@ public class Db {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
 
-    String hardCodedSocietyRef = "G6WCJXLH90iJdaXdw6Un";
-
     public interface NewUser{
 
         void isNewUserCallback(boolean isNewUser);
@@ -229,13 +227,13 @@ public class Db {
         poll.put("question",ques);
         poll.put("options",pollCounts);
 
-        db.collection("Societies").document(hardCodedSocietyRef)
+        db.collection("Societies").document(Globals.society.getSocietyRef())
                 .collection(pollsSubCollection)
                 .add(poll);
     }
 
     public void voteInPoll(String pollId, String option){
-        db.collection("Societies").document(hardCodedSocietyRef)
+        db.collection("Societies").document(Globals.user.getSocietyRef())
                 .collection(pollsSubCollection)
                 .document(pollId)
                 .update("options."+option, FieldValue.increment(1));
@@ -243,12 +241,12 @@ public class Db {
 
     public FirestoreRecyclerOptions<Poll> getPollsRecyclerOptions(){
         return new FirestoreRecyclerOptions.Builder<Poll>()
-                    .setQuery(db.collection("Societies").document(hardCodedSocietyRef).collection("Polls"), Poll.class)
+                    .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Polls"), Poll.class)
                     .build();
     }
 
     public void test(){
-        db.collection("Societies").document(hardCodedSocietyRef).collection("Polls").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Polls").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (!queryDocumentSnapshots.isEmpty()){

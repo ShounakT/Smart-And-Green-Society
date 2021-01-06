@@ -30,13 +30,15 @@
             android:layout_height="wrap_content"/>
 
         <Button
-            android:id="@+id/createpoll"
+            android:visibility="gone"
+            android:id="@+id/btnCreatePoll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create Poll"/>
 
         <Button
-            android:id="@+id/viewpolls"
+            android:visibility="gone"
+            android:id="@+id/btnViewPolls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View Polls"/>

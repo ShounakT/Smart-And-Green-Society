@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     Db db = new Db();
-    Button btnAddResidents;
+    Button btnAddResidents, btnCreatePoll, btnViewPolls;
 
 
     @Override
@@ -72,6 +72,8 @@ public class HomeActivity extends AppCompatActivity {
 
         firebaseUser = firebaseAuth.getCurrentUser();
         btnAddResidents = findViewById(R.id.btnAddResidents);
+        btnCreatePoll = findViewById(R.id.btnCreatePoll);
+        btnViewPolls = findViewById(R.id.btnViewPolls);
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -97,6 +99,10 @@ public class HomeActivity extends AppCompatActivity {
 
         if(SP.getSP(getApplicationContext(),"designation").equals("Secretary")){
             btnAddResidents.setVisibility(View.VISIBLE);
+            btnCreatePoll.setVisibility(View.VISIBLE);
+        }
+        if(SP.getSP(getApplicationContext(),"designation").equals("Resident")){
+            btnViewPolls.setVisibility(View.VISIBLE);
         }
 
         btnAddResidents.setOnClickListener(new View.OnClickListener() {
@@ -107,23 +113,21 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.createpoll).setOnClickListener(new View.OnClickListener() {
+        btnCreatePoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ques = "Python is better than java";
-                List<String> options = new ArrayList<>();
 
-                options.add("Yes");
-                options.add("No");
+                startActivity(new Intent(HomeActivity.this, CreatePollActivity.class));
+                HomeActivity.this.finish();
 
-                db.createPoll(ques,options);
             }
         });
 
-        findViewById(R.id.viewpolls).setOnClickListener(new View.OnClickListener() {
+        btnViewPolls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this,PollsActivity.class));
+                HomeActivity.this.finish();
             }
         });
     }
