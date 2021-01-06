@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.Poll;
+import com.example.smartandgreensociety.UserAuth.Notice;
 import com.example.smartandgreensociety.UserAuth.SP;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class Db {
 
     static final String pollsSubCollection = "Polls";
+    static final String noticesSubCollection = "Notices";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -232,6 +234,14 @@ public class Db {
                 .add(poll);
     }
 
+    public void addNotice(Map noticeMap){
+
+        db.collection("Societies").document(Globals.society.getSocietyRef())
+                .collection(noticesSubCollection)
+                .add(noticeMap);
+
+    }
+
     public void voteInPoll(String pollId, String option){
         db.collection("Societies").document(Globals.user.getSocietyRef())
                 .collection(pollsSubCollection)
@@ -245,17 +255,11 @@ public class Db {
                     .build();
     }
 
-    public void test(){
-        db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Polls").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (!queryDocumentSnapshots.isEmpty()){
-                    Log.e("TAG","Not empty");
-                } else {
-                    Log.e("TAG","Empty");
-                }
-            }
-        });
+    public FirestoreRecyclerOptions<Notice> getNoticeRecycler(){
+        return new FirestoreRecyclerOptions.Builder<Notice>()
+                .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Notices"),Notice.class)
+                .build();
     }
+
 
 }

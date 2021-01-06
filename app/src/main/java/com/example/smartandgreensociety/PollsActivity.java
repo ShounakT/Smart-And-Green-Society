@@ -29,7 +29,6 @@ public class PollsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polls2);
 
-        db.test();
     }
 
     @Override

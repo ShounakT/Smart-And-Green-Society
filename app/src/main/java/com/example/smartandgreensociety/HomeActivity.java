@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     Db db = new Db();
-    Button btnAddResidents, btnCreatePoll, btnViewPolls;
+    Button btnAddResidents, btnCreatePoll, btnViewPolls, btnAddNotice;
 
 
     @Override
@@ -74,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddResidents = findViewById(R.id.btnAddResidents);
         btnCreatePoll = findViewById(R.id.btnCreatePoll);
         btnViewPolls = findViewById(R.id.btnViewPolls);
+        btnAddNotice = findViewById(R.id.btnAddNotice);
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -100,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         if(SP.getSP(getApplicationContext(),"designation").equals("Secretary")){
             btnAddResidents.setVisibility(View.VISIBLE);
             btnCreatePoll.setVisibility(View.VISIBLE);
+            btnAddNotice.setVisibility(View.VISIBLE);
         }
         if(SP.getSP(getApplicationContext(),"designation").equals("Resident")){
             btnViewPolls.setVisibility(View.VISIBLE);
@@ -127,6 +129,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this,PollsActivity.class));
+                HomeActivity.this.finish();
+            }
+        });
+
+        btnAddNotice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,AddNoticeActivity.class));
                 HomeActivity.this.finish();
             }
         });

@@ -31,17 +31,33 @@
 
         <Button
             android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:id="@+id/btnCreatePoll"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create Poll"/>
 
         <Button
             android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:id="@+id/btnViewPolls"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Polls"/>
+        <Button
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/btnAddNotice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Notice"/>
+
 
 
 
