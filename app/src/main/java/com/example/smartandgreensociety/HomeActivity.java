@@ -51,7 +51,8 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     Db db = new Db();
-    Button btnAddResidents, btnCreatePoll, btnViewPolls, btnAddNotice;
+    Button btnAddResidents, btnCreatePoll, btnViewPolls, btnAddNotice, btnAddComplaint,
+            btnGiveFeedback;
 
 
     @Override
@@ -75,20 +76,45 @@ public class HomeActivity extends AppCompatActivity {
         btnCreatePoll = findViewById(R.id.btnCreatePoll);
         btnViewPolls = findViewById(R.id.btnViewPolls);
         btnAddNotice = findViewById(R.id.btnAddNotice);
+        btnAddComplaint = findViewById(R.id.btnAddComplaint);
+        btnGiveFeedback = findViewById(R.id.btnGiveFeedback);
 
         nv.setNavigationItemSelectedListener(item -> {
 
             int id = item.getItemId();
             switch(id){
                 case R.id.profile:
-                    Toast.makeText(HomeActivity.this,"Welcome To Your Profile!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this,"Welcome To Your Profile!",
+                            Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),UserProfileActivity.class));
                     this.finish();
                     break;
 
                 case R.id.noticeBoard:
-                    Toast.makeText(HomeActivity.this,"Welcome To Notice Board!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this,"Welcome To Notice Board!",
+                            Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),NoticeBoardActivity.class));
+                    this.finish();
+                    break;
+
+                case R.id.societyInfo:
+                    Toast.makeText(HomeActivity.this,"Welcome To Society Information!",
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),SocietyInfoActivity.class));
+                    this.finish();
+                    break;
+
+                case R.id.societyComplaints:
+                    Toast.makeText(HomeActivity.this,"Welcome To Complaint Section!",
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),SocietyComplaintActivity.class));
+                    this.finish();
+                    break;
+
+                case R.id.societyFeedback:
+                    Toast.makeText(HomeActivity.this,"Welcome To Feedback Section!",
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),SocietyFeedbackActivity.class));
                     this.finish();
                     break;
             }
@@ -140,6 +166,17 @@ public class HomeActivity extends AppCompatActivity {
                 HomeActivity.this.finish();
             }
         });
+
+        btnGiveFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,AddFeedbackActivity.class));
+                HomeActivity.this.finish();
+            }
+        });
+
+
+
     }
 
 

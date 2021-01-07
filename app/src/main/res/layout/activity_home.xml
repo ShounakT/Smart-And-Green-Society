@@ -57,6 +57,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Notice"/>
+        <Button
+            android:text="Add Complaint"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/btnAddComplaint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Give Feedback"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/btnGiveFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
 

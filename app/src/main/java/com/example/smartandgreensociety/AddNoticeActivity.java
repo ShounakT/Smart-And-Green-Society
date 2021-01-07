@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
-import com.example.smartandgreensociety.UserAuth.Notice;
 
 import java.util.Map;
 

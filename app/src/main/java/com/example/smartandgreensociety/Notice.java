@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.UserAuth;
+package com.example.smartandgreensociety;
 
 import java.io.Serializable;
 import java.util.HashMap;
