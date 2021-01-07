@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety;
+package com.example.smartandgreensociety.PollingModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.HomeActivity;
+import com.example.smartandgreensociety.R;
 
 public class VoteForPollActivity extends AppCompatActivity {
 

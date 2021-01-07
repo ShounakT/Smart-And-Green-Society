@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety;
+package com.example.smartandgreensociety.NoticeModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.HomeActivity;
+import com.example.smartandgreensociety.R;
 
 import java.util.Map;
 
@@ -37,7 +39,7 @@ public class AddNoticeActivity extends AppCompatActivity {
                 notice.setNoticeContent(noticeContent);
                 Map noticeMap = notice.toNoticeMap();
                 db.addNotice(noticeMap);
-                startActivity(new Intent(AddNoticeActivity.this,HomeActivity.class));
+                startActivity(new Intent(AddNoticeActivity.this, HomeActivity.class));
                 AddNoticeActivity.this.finish();
             }
         });

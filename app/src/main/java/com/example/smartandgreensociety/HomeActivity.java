@@ -1,46 +1,32 @@
 package com.example.smartandgreensociety;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartandgreensociety.ComplaintModule.AddComplaintActivity;
+import com.example.smartandgreensociety.ComplaintModule.SocietyComplaintActivity;
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.FeedbackModule.AddFeedbackActivity;
+import com.example.smartandgreensociety.FeedbackModule.SocietyFeedbackActivity;
+import com.example.smartandgreensociety.NoticeModule.AddNoticeActivity;
+import com.example.smartandgreensociety.NoticeModule.NoticeBoardActivity;
+import com.example.smartandgreensociety.PollingModule.CreatePollActivity;
+import com.example.smartandgreensociety.PollingModule.PollsActivity;
+import com.example.smartandgreensociety.SocietyInformation.SocietyInfoActivity;
 import com.example.smartandgreensociety.UserAuth.SP;
-import com.example.smartandgreensociety.UserAuth.Society;
-import com.example.smartandgreensociety.UserAuth.User;
-import com.firebase.ui.auth.AuthMethodPickerLayout;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -93,28 +79,28 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.noticeBoard:
                     Toast.makeText(HomeActivity.this,"Welcome To Notice Board!",
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),NoticeBoardActivity.class));
+                    startActivity(new Intent(getApplicationContext(), NoticeBoardActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyInfo:
                     Toast.makeText(HomeActivity.this,"Welcome To Society Information!",
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),SocietyInfoActivity.class));
+                    startActivity(new Intent(getApplicationContext(), SocietyInfoActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyComplaints:
                     Toast.makeText(HomeActivity.this,"Welcome To Complaint Section!",
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),SocietyComplaintActivity.class));
+                    startActivity(new Intent(getApplicationContext(), SocietyComplaintActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyFeedback:
                     Toast.makeText(HomeActivity.this,"Welcome To Feedback Section!",
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),SocietyFeedbackActivity.class));
+                    startActivity(new Intent(getApplicationContext(), SocietyFeedbackActivity.class));
                     this.finish();
                     break;
             }
@@ -154,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
         btnViewPolls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this,PollsActivity.class));
+                startActivity(new Intent(HomeActivity.this, PollsActivity.class));
                 HomeActivity.this.finish();
             }
         });
@@ -162,7 +148,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddNotice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,AddNoticeActivity.class));
+                startActivity(new Intent(HomeActivity.this, AddNoticeActivity.class));
                 HomeActivity.this.finish();
             }
         });
@@ -170,7 +156,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddComplaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,AddComplaintActivity.class));
+                startActivity(new Intent(HomeActivity.this, AddComplaintActivity.class));
                 HomeActivity.this.finish();
             }
         });
@@ -178,7 +164,7 @@ public class HomeActivity extends AppCompatActivity {
         btnGiveFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,AddFeedbackActivity.class));
+                startActivity(new Intent(HomeActivity.this, AddFeedbackActivity.class));
                 HomeActivity.this.finish();
             }
         });

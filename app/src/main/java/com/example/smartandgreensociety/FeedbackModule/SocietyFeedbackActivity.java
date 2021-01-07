@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety;
+package com.example.smartandgreensociety.FeedbackModule;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,52 +14,49 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.HomeActivity;
+import com.example.smartandgreensociety.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class SocietyComplaintActivity extends AppCompatActivity {
+public class SocietyFeedbackActivity extends AppCompatActivity {
 
     FirestoreRecyclerAdapter adapter;
     Db db = new Db();
 
     @Override
     public boolean onSupportNavigateUp() {
-        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-        SocietyComplaintActivity.this.finish();
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        SocietyFeedbackActivity.this.finish();
         return super.onSupportNavigateUp();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_society_complaint);
+        setContentView(R.layout.activity_society_feedback);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        FirestoreRecyclerOptions<SocietyComplaint> socComplaint = db.getComplaintsRecycler();
+        FirestoreRecyclerOptions<SocietyFeedback> socFeedback = db.getFeedbacksRecycler();
 
-        ((RecyclerView)findViewById(R.id.complaints))
+        ((RecyclerView)findViewById(R.id.feedbacks))
                 .setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
-        adapter = new FirestoreRecyclerAdapter<SocietyComplaint, SocietyComplaintActivity.ComplaintHolder>(socComplaint) {
+        adapter = new FirestoreRecyclerAdapter<SocietyFeedback, SocietyFeedbackActivity.FeedbackHolder>(socFeedback) {
+
 
             @Override
-            protected void onBindViewHolder(@NonNull ComplaintHolder holder, int position, @NonNull SocietyComplaint model) {
-
-                holder.tvComplaintHeadings.setText(model.getComplaintHeading());
-                holder.tvComplaintContents.setText(model.getComplaintContent());
-
-            }
-            @Override
-            public SocietyComplaintActivity.ComplaintHolder onCreateViewHolder(ViewGroup group, int i) {
+            public SocietyFeedbackActivity.FeedbackHolder onCreateViewHolder(ViewGroup group, int i) {
                 View view = LayoutInflater.from(group.getContext())
-                        .inflate(R.layout.complaintholder, group, false);
+                        .inflate(R.layout.feedbackholder, group, false);
 
-                return new SocietyComplaintActivity.ComplaintHolder(view);
+                return new SocietyFeedbackActivity.FeedbackHolder(view);
             }
 
             @Override
@@ -67,13 +64,17 @@ public class SocietyComplaintActivity extends AppCompatActivity {
                 Log.e("error", e.getMessage());
             }
 
+            @Override
+            protected void onBindViewHolder(@NonNull FeedbackHolder holder, int position, @NonNull SocietyFeedback model) {
 
+                holder.tvFeedbackHeadings.setText(model.getFeedbackHeading());
+                holder.tvFeedbackContents.setText(model.getFeedbackContent());
 
-
+            }
         };
         adapter.notifyDataSetChanged();
         adapter.startListening();
-        ((RecyclerView)findViewById(R.id.complaints)).setAdapter(adapter);
+        ((RecyclerView)findViewById(R.id.feedbacks)).setAdapter(adapter);
     }
     @Override
     protected void onStop() {
@@ -81,14 +82,15 @@ public class SocietyComplaintActivity extends AppCompatActivity {
         adapter.stopListening();
     }
 
-    public class ComplaintHolder extends RecyclerView.ViewHolder {
+    public class FeedbackHolder extends RecyclerView.ViewHolder {
 
-        TextView tvComplaintHeadings, tvComplaintContents;
+        TextView tvFeedbackHeadings, tvFeedbackContents;
 
-        public ComplaintHolder(View itemView) {
+        public FeedbackHolder(View itemView) {
             super(itemView);
-            tvComplaintHeadings = itemView.findViewById(R.id.tvComplaintHeading);
-            tvComplaintContents = itemView.findViewById(R.id.tvComplaintContent);
+
+            tvFeedbackHeadings = itemView.findViewById(R.id.tvFeedbackHeading);
+            tvFeedbackContents = itemView.findViewById(R.id.tvFeedbackContent);
 
         }
 

@@ -4,10 +4,10 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.smartandgreensociety.Globals;
-import com.example.smartandgreensociety.Poll;
-import com.example.smartandgreensociety.Notice;
-import com.example.smartandgreensociety.SocietyComplaint;
-import com.example.smartandgreensociety.SocietyFeedback;
+import com.example.smartandgreensociety.PollingModule.Poll;
+import com.example.smartandgreensociety.NoticeModule.Notice;
+import com.example.smartandgreensociety.ComplaintModule.SocietyComplaint;
+import com.example.smartandgreensociety.FeedbackModule.SocietyFeedback;
 import com.example.smartandgreensociety.UserAuth.SP;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;

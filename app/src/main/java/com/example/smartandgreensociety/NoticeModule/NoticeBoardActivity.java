@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety;
+package com.example.smartandgreensociety.NoticeModule;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.HomeActivity;
+import com.example.smartandgreensociety.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -30,7 +32,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
     }
     @Override
     public boolean onSupportNavigateUp() {
-        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
         NoticeBoardActivity.this.finish();
         return super.onSupportNavigateUp();
     }

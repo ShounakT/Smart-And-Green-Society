@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety;
+package com.example.smartandgreensociety.FeedbackModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.HomeActivity;
+import com.example.smartandgreensociety.R;
 
 import java.util.Map;
 
@@ -37,7 +39,7 @@ public class AddFeedbackActivity extends AppCompatActivity {
                 societyFeedback.setFeedbackContent(feedbackContent);
                 Map societyFeedbackMap = societyFeedback.toFeedbackMap();
                 db.addFeedback(societyFeedbackMap);
-                startActivity(new Intent(AddFeedbackActivity.this,HomeActivity.class));
+                startActivity(new Intent(AddFeedbackActivity.this, HomeActivity.class));
                 AddFeedbackActivity.this.finish();
             }
         });
