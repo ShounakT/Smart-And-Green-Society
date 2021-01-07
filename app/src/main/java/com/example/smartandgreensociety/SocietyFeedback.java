@@ -27,11 +27,11 @@ public class SocietyFeedback {
         this.feedbackContent = feedbackContent;
     }
 
-    public Map toCComplaintMap(){
+    public Map toFeedbackMap(){
 
         Map feedbackMap = new HashMap();
-        feedbackMap.put("noticeTitle",getFeedbackHeading());
-        feedbackMap.put("noticeContent",getFeedbackContent());
+        feedbackMap.put("feedbackTitle",getFeedbackHeading());
+        feedbackMap.put("feedbackContent",getFeedbackContent());
         return feedbackMap;
     }
 }

@@ -2,6 +2,7 @@ package com.example.smartandgreensociety;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 public class AddFeedbackActivity extends AppCompatActivity {
 
-    EditText etFeedbackName, etFeedbackContent;
+    EditText etFeedbackTitle, etFeedbackContent;
     Button btnAddFeedback;
     SocietyFeedback societyFeedback = new SocietyFeedback();
     Db db = new Db();
@@ -22,7 +23,7 @@ public class AddFeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_feedback);
 
-        etFeedbackName = findViewById(R.id.etFeedbackName);
+        etFeedbackTitle = findViewById(R.id.etFeedbackTitle);
         etFeedbackContent = findViewById(R.id.etFeedbackContent);
         btnAddFeedback = findViewById(R.id.btnAddFeedback);
 
@@ -30,12 +31,14 @@ public class AddFeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String feedbackTitle = etFeedbackName.getText().toString().trim();
+                String feedbackTitle = etFeedbackTitle.getText().toString().trim();
                 String feedbackContent = etFeedbackContent.getText().toString().trim();
                 societyFeedback.setFeedbackHeading(feedbackTitle);
                 societyFeedback.setFeedbackContent(feedbackContent);
-                Map societyFeedbackMap = societyFeedback.toCComplaintMap();
-                db.addComplaint(societyFeedbackMap);
+                Map societyFeedbackMap = societyFeedback.toFeedbackMap();
+                db.addFeedback(societyFeedbackMap);
+                startActivity(new Intent(AddFeedbackActivity.this,HomeActivity.class));
+                AddFeedbackActivity.this.finish();
             }
         });
     }

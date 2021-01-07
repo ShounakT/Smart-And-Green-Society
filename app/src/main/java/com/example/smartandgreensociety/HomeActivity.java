@@ -167,6 +167,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        btnAddComplaint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,AddComplaintActivity.class));
+                HomeActivity.this.finish();
+            }
+        });
+
         btnGiveFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

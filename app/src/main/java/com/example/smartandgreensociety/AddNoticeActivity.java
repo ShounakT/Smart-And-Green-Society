@@ -2,6 +2,7 @@ package com.example.smartandgreensociety;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +37,8 @@ public class AddNoticeActivity extends AppCompatActivity {
                 notice.setNoticeContent(noticeContent);
                 Map noticeMap = notice.toNoticeMap();
                 db.addNotice(noticeMap);
-
+                startActivity(new Intent(AddNoticeActivity.this,HomeActivity.class));
+                AddNoticeActivity.this.finish();
             }
         });
     }

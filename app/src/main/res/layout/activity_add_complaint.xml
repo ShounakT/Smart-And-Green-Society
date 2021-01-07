@@ -9,7 +9,7 @@
 
     <EditText
         android:hint="Enter complaint title..."
-        android:id="@+id/etComplaintName"
+        android:id="@+id/etComplaintTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

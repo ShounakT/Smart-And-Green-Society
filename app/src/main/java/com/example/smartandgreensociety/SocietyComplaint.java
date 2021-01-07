@@ -27,11 +27,11 @@ public class SocietyComplaint {
         this.complaintContent = complaintContent;
     }
 
-    public Map toCComplaintMap(){
+    public Map toComplaintMap(){
 
         Map complaintMap = new HashMap();
-        complaintMap.put("noticeTitle",getComplaintHeading());
-        complaintMap.put("noticeContent",getComplaintContent());
+        complaintMap.put("complaintTitle",getComplaintHeading());
+        complaintMap.put("complaintContent",getComplaintContent());
         return complaintMap;
     }
 }

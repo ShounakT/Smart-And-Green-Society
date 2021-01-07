@@ -52,7 +52,7 @@ public class SocietyFeedbackActivity extends AppCompatActivity {
             @Override
             public SocietyFeedbackActivity.FeedbackHolder onCreateViewHolder(ViewGroup group, int i) {
                 View view = LayoutInflater.from(group.getContext())
-                        .inflate(R.layout.complaintholder, group, false);
+                        .inflate(R.layout.feedbackholder, group, false);
 
                 return new SocietyFeedbackActivity.FeedbackHolder(view);
             }
@@ -65,7 +65,7 @@ public class SocietyFeedbackActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull FeedbackHolder holder, int position, @NonNull SocietyFeedback model) {
 
-                holder.tvFeedbackHeading.setText(model.getFeedbackHeading());
+                holder.tvFeedbackHeadings.setText(model.getFeedbackHeading());
                 holder.tvFeedbackContents.setText(model.getFeedbackContent());
 
             }
@@ -82,11 +82,12 @@ public class SocietyFeedbackActivity extends AppCompatActivity {
 
     public class FeedbackHolder extends RecyclerView.ViewHolder {
 
-        TextView tvFeedbackHeading, tvFeedbackContents;
+        TextView tvFeedbackHeadings, tvFeedbackContents;
 
         public FeedbackHolder(View itemView) {
             super(itemView);
-            tvFeedbackHeading = itemView.findViewById(R.id.tvFeedbackHeading);
+
+            tvFeedbackHeadings = itemView.findViewById(R.id.tvFeedbackHeading);
             tvFeedbackContents = itemView.findViewById(R.id.tvFeedbackContent);
 
         }

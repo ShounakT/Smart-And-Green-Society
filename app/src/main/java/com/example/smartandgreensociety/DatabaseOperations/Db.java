@@ -29,6 +29,8 @@ public class Db {
 
     static final String pollsSubCollection = "Polls";
     static final String noticesSubCollection = "Notices";
+    static final String complaintsSubCollection = "Complaints";
+    static final String feedbacksSubCollection = "Feedbacks";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -237,18 +239,18 @@ public class Db {
                 .add(noticeMap);
 
     }
-    public void addComplaint(Map noticeMap){
+    public void addComplaint(Map complaintMap){
 
         db.collection("Societies").document(Globals.society.getSocietyRef())
-                .collection("Complaints")
-                .add(noticeMap);
+                .collection(complaintsSubCollection)
+                .add(complaintMap);
 
     }
-    public void addFeedback(Map noticeMap){
+    public void addFeedback(Map feedbackMap){
 
         db.collection("Societies").document(Globals.society.getSocietyRef())
-                .collection("Feedbacks")
-                .add(noticeMap);
+                .collection(feedbacksSubCollection)
+                .add(feedbackMap);
 
     }
 
@@ -274,13 +276,13 @@ public class Db {
 
     public FirestoreRecyclerOptions<SocietyComplaint> getComplaintsRecycler(){
         return new FirestoreRecyclerOptions.Builder<SocietyComplaint>()
-                .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Complaints"),SocietyComplaint.class)
+                .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection(complaintsSubCollection),SocietyComplaint.class)
                 .build();
     }
 
     public FirestoreRecyclerOptions<SocietyFeedback> getFeedbacksRecycler(){
         return new FirestoreRecyclerOptions.Builder<SocietyFeedback>()
-                .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Feedbacks"),SocietyFeedback.class)
+                .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection(feedbacksSubCollection),SocietyFeedback.class)
                 .build();
     }
 

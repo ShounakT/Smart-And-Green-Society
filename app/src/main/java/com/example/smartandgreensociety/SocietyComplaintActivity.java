@@ -50,7 +50,7 @@ public class SocietyComplaintActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull ComplaintHolder holder, int position, @NonNull SocietyComplaint model) {
 
-                holder.tvComplaintHeading.setText(model.getComplaintHeading());
+                holder.tvComplaintHeadings.setText(model.getComplaintHeading());
                 holder.tvComplaintContents.setText(model.getComplaintContent());
 
             }
@@ -83,11 +83,11 @@ public class SocietyComplaintActivity extends AppCompatActivity {
 
     public class ComplaintHolder extends RecyclerView.ViewHolder {
 
-        TextView tvComplaintHeading, tvComplaintContents;
+        TextView tvComplaintHeadings, tvComplaintContents;
 
         public ComplaintHolder(View itemView) {
             super(itemView);
-            tvComplaintHeading = itemView.findViewById(R.id.tvComplaintHeading);
+            tvComplaintHeadings = itemView.findViewById(R.id.tvComplaintHeading);
             tvComplaintContents = itemView.findViewById(R.id.tvComplaintContent);
 
         }
