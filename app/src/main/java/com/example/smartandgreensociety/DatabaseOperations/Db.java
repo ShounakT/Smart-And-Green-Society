@@ -6,6 +6,8 @@ import android.widget.Toast;
 import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.Poll;
 import com.example.smartandgreensociety.Notice;
+import com.example.smartandgreensociety.SocietyComplaint;
+import com.example.smartandgreensociety.SocietyFeedback;
 import com.example.smartandgreensociety.UserAuth.SP;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
@@ -235,6 +237,21 @@ public class Db {
                 .add(noticeMap);
 
     }
+    public void addComplaint(Map noticeMap){
+
+        db.collection("Societies").document(Globals.society.getSocietyRef())
+                .collection("Complaints")
+                .add(noticeMap);
+
+    }
+    public void addFeedback(Map noticeMap){
+
+        db.collection("Societies").document(Globals.society.getSocietyRef())
+                .collection("Feedbacks")
+                .add(noticeMap);
+
+    }
+
 
     public void voteInPoll(String pollId, String option){
         db.collection("Societies").document(Globals.user.getSocietyRef())
@@ -255,5 +272,16 @@ public class Db {
                 .build();
     }
 
+    public FirestoreRecyclerOptions<SocietyComplaint> getComplaintsRecycler(){
+        return new FirestoreRecyclerOptions.Builder<SocietyComplaint>()
+                .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Complaints"),SocietyComplaint.class)
+                .build();
+    }
+
+    public FirestoreRecyclerOptions<SocietyFeedback> getFeedbacksRecycler(){
+        return new FirestoreRecyclerOptions.Builder<SocietyFeedback>()
+                .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection("Feedbacks"),SocietyFeedback.class)
+                .build();
+    }
 
 }

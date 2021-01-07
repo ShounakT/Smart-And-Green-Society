@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Notice implements Serializable {
-    String noticeTitle;
-    String noticeContent;
+    private String noticeTitle;
+    private String noticeContent;
 
 
     public Notice() {
