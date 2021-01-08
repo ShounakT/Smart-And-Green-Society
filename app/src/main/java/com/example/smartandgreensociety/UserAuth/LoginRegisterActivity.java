@@ -30,7 +30,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
-        Globals.society = new Society();
+
 
         firebaseUser = firebaseAuth.getCurrentUser();
 
@@ -44,9 +44,14 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     .build(), AuthUI_Req_Code);
         }else{
             //User Is Registered & Opened app
-            db.setUserDetailsGlobally(firebaseUser.getUid(),getApplicationContext());
-            startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
-            LoginRegisterActivity.this.finish();
+            db.setUserDetailsGloballyWaitForCallback(firebaseUser.getUid(), getApplicationContext(), new Db.globalUserSet() {
+                @Override
+                public void detailsSet() {
+                    startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
+                    LoginRegisterActivity.this.finish();
+                }
+            });
+
         }
     }
 
@@ -75,11 +80,16 @@ public class LoginRegisterActivity extends AppCompatActivity {
                         //User is Registered
                         } else {
 
-                            db.setUserDetailsGlobally(firebaseUser.getUid(),getApplicationContext());
-                            startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
-                            LoginRegisterActivity.this.finish();
-                            Toast.makeText(getApplicationContext(), "Welcome Back!",
-                                    Toast.LENGTH_SHORT).show();
+                            db.setUserDetailsGloballyWaitForCallback(firebaseUser.getUid(), getApplicationContext(), new Db.globalUserSet() {
+                                @Override
+                                public void detailsSet() {
+                                    startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class));
+                                    LoginRegisterActivity.this.finish();
+                                    Toast.makeText(getApplicationContext(), "Welcome Back!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         }
                     }
 

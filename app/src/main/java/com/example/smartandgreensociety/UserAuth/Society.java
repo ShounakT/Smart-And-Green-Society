@@ -25,8 +25,8 @@ public class Society {
    }
 
    public String getSocietyRef() {
-      return "sU1OhekH9b5a4pWhKJYY";
-      //return societyRef;
+//      return "L8TKL1L3VUn0rg6SiBUm";
+      return societyRef;
    }
 
    public void setSocietyRef(String societyRef) {

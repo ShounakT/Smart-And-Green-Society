@@ -50,6 +50,15 @@ public class HomeActivity extends AppCompatActivity {
         dl = (DrawerLayout) findViewById(R.id.home_act);
         t = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
         nv = findViewById(R.id.nav_view);
+
+        if (Globals.user.getSocietyRef() == null || Globals.user.getSocietyRef().equals("")){
+            // Not in society
+            nv.inflateMenu(R.menu.not_in_society_nav_menu);
+        } else {
+            // In Society
+            nv.inflateMenu(R.menu.in_society_nav_menu);
+        }
+
         View headerview = nv.getHeaderView(0);
         TextView navUserName = headerview.findViewById(R.id.navUserName);
         TextView navUserEmail = headerview.findViewById(R.id.navUserEmail);
@@ -110,12 +119,12 @@ public class HomeActivity extends AppCompatActivity {
         navUserName.setText(firebaseUser.getDisplayName());
         navUserEmail.setText(firebaseUser.getEmail());
 
-        if(SP.getSP(getApplicationContext(),"designation").equals("Secretary")){
+        if(Globals.user.getDesignation().equals("Secretary")){
             btnAddResidents.setVisibility(View.VISIBLE);
             btnCreatePoll.setVisibility(View.VISIBLE);
             btnAddNotice.setVisibility(View.VISIBLE);
         }
-        if(SP.getSP(getApplicationContext(),"designation").equals("Resident")){
+        if(Globals.user.getDesignation().equals("Resident")){
             btnViewPolls.setVisibility(View.VISIBLE);
         }
 

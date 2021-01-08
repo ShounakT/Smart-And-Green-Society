@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,8 +22,7 @@ public class SecretaryRegActivity extends AppCompatActivity {
     EditText userPhone,etSocietyName;
     Button btnRegister;
     Db db = new  Db();
-    User user = new User();
-    Society society = new Society();
+
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     @Override
@@ -41,17 +41,17 @@ public class SecretaryRegActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String societyName = etSocietyName.getText().toString().trim();
-                society.setSocietyName(societyName);
-                user.setName(firebaseUser.getDisplayName());
-                user.setDesignation("Secretary");
-                user.setEmail(firebaseUser.getEmail());
-                user.setUid(firebaseUser.getUid());
-                user.setPhone(userPhone.getText().toString().trim());
+                Globals.society.setSocietyName(societyName);
+                Globals.user.setName(firebaseUser.getDisplayName());
+                Globals.user.setDesignation("Secretary");
+                Globals.user.setEmail(firebaseUser.getEmail());
+                Globals.user.setUid(firebaseUser.getUid());
+                Globals.user.setPhone(userPhone.getText().toString().trim());
 
-                Map userMap = user.toMapSecretary();
+                Map userMap = Globals.user.toMapSecretary();
                 db.createNewUser(userMap, getApplicationContext());
 
-                Map societyMap = society.toMapSociety();
+                Map societyMap = Globals.society.toMapSociety();
                 db.createNewSociety(societyMap,getApplicationContext());
 
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));

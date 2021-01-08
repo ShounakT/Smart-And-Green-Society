@@ -68,10 +68,7 @@ public class Db {
 
     public void createNewUser(Map newUserMap, Context context){
         firebaseUser = firebaseAuth.getCurrentUser();
-        SP.setSP(context,"name",newUserMap.get("name").toString());
-        SP.setSP(context,"email",newUserMap.get("email").toString());
-        SP.setSP(context,"designation",newUserMap.get("designation").toString());
-        SP.setSP(context,"phone",newUserMap.get("phone").toString());
+
         setUserDetailsGlobally(firebaseUser.getUid(),context);
 
         db
@@ -89,6 +86,41 @@ public class Db {
 
     }
 
+    public void setUserDetailsGloballyWaitForCallback(String uId,Context context, final globalUserSet globalUserSet){
+        db
+                .collection("Users")
+                .document(uId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+
+                        Globals.user = new User();
+                        Globals.user.setUid(uId);
+                        Globals.user.setName(documentSnapshot.getString("name"));
+                        Globals.user.setEmail(documentSnapshot.getString("email"));
+                        Globals.user.setDesignation(documentSnapshot.getString("designation"));
+                        Globals.user.setPhone(documentSnapshot.getString("phone"));
+                        Globals.user.setSocietyRef(documentSnapshot.getString("societyRef"));
+
+                        if (documentSnapshot.getString("societyRef") == null || documentSnapshot.getString("societyRef").equals("")){
+                            globalUserSet.detailsSet();
+                            return;
+                        }
+
+                        setSocietyDetailsGlobally(documentSnapshot.getString("societyRef"), new globalSocietySet() {
+                            @Override
+                            public void detailsSet() {
+                                globalUserSet.detailsSet();
+                            }
+                        });
+
+
+                    }
+                });
+    }
+
     public void setUserDetailsGlobally(String uId,Context context){
 
         db
@@ -99,11 +131,6 @@ public class Db {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                        SP.setSP(context,"name",documentSnapshot.getString("name"));
-                        SP.setSP(context,"email",documentSnapshot.getString("email"));
-                        SP.setSP(context,"designation",documentSnapshot.getString("designation"));
-                        SP.setSP(context,"phone",documentSnapshot.getString("phone"));
-                        SP.setSP(context,"societyRef",documentSnapshot.getString("societyRef"));
                         Globals.user = new User();
                         Globals.user.setUid(uId);
                         Globals.user.setName(documentSnapshot.getString("name"));
@@ -114,7 +141,7 @@ public class Db {
                     }
                 });
     }
-    public void setSocietyDetailsGlobally(String sId){
+    public void setSocietyDetailsGlobally(String sId, final globalSocietySet globalSocietySet){
 
         db
                 .collection("Societies")
@@ -127,6 +154,9 @@ public class Db {
                         Globals.society = new Society();
                         Globals.society.setSocietyRef(sId);
                         Globals.society.setSocietyName(documentSnapshot.getString("societyName"));
+
+
+                        globalSocietySet.detailsSet();
                     }
                 });
     }
@@ -137,7 +167,11 @@ public class Db {
         db
                 .collection("Societies")
                 .document();
-        setSocietyDetailsGlobally(documentReference.getId());
+
+        Globals.society = new Society();
+        Globals.society.setSocietyRef(documentReference.getId());
+        Globals.society.setSocietyName(newSocietyMap.get("societyName").toString());
+
         documentReference
                             .set(newSocietyMap)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -145,7 +179,7 @@ public class Db {
                                 public void onSuccess(Void aVoid) {
 
                                     addMemberInSociety(documentReference,context);
-                                    updateSocietyDetails(documentReference);
+//                                    updateSocietyDetails(documentReference);
                                 }
                             });
 
@@ -161,7 +195,6 @@ public class Db {
 
     public void addMemberInSociety(DocumentReference sId,Context context){
 
-        SP.setSP(context,"societyRef",sId.getId());
         Globals.user.setSocietyRef(sId.getId());
         updateUserDetails();
         sId
@@ -285,6 +318,14 @@ public class Db {
         return new FirestoreRecyclerOptions.Builder<SocietyFeedback>()
                 .setQuery(db.collection("Societies").document(Globals.society.getSocietyRef()).collection(feedbacksSubCollection),SocietyFeedback.class)
                 .build();
+    }
+
+    public interface globalUserSet {
+        void detailsSet();
+    }
+
+    public interface globalSocietySet {
+        void detailsSet();
     }
 
 }

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +23,6 @@ public class ResidentRegActivity extends AppCompatActivity {
     Button btnRegister;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    User user;
     Db db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +34,18 @@ public class ResidentRegActivity extends AppCompatActivity {
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         db = new Db();
-        user = new User();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                user.setName(firebaseUser.getDisplayName());
-                user.setDesignation("Resident");
-                user.setEmail(firebaseUser.getEmail());
-                user.setUid(firebaseUser.getUid());
-                user.setPhone(userPhone.getText().toString().trim());
+                Globals.user.setName(firebaseUser.getDisplayName());
+                Globals.user.setDesignation("Resident");
+                Globals.user.setEmail(firebaseUser.getEmail());
+                Globals.user.setUid(firebaseUser.getUid());
+                Globals.user.setPhone(userPhone.getText().toString().trim());
 
-                Map userMap = user.toMapResident();
+                Map userMap = Globals.user.toMapResident();
 
                 db.createNewUser(userMap, getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
