@@ -30,7 +30,7 @@ public class SocietyComplaint {
     public Map toComplaintMap(){
 
         Map complaintMap = new HashMap();
-        complaintMap.put("complaintTitle",getComplaintHeading());
+        complaintMap.put("complaintHeading",getComplaintHeading());
         complaintMap.put("complaintContent",getComplaintContent());
         return complaintMap;
     }

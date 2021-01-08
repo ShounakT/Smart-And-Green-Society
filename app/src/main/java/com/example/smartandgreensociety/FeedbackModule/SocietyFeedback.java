@@ -30,7 +30,7 @@ public class SocietyFeedback {
     public Map toFeedbackMap(){
 
         Map feedbackMap = new HashMap();
-        feedbackMap.put("feedbackTitle",getFeedbackHeading());
+        feedbackMap.put("feedbackHeading",getFeedbackHeading());
         feedbackMap.put("feedbackContent",getFeedbackContent());
         return feedbackMap;
     }

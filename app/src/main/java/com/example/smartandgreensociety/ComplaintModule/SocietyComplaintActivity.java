@@ -51,7 +51,7 @@ public class SocietyComplaintActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull ComplaintHolder holder, int position, @NonNull SocietyComplaint model) {
-
+                Log.e("SOC", model.getComplaintHeading());
                 holder.tvComplaintHeadings.setText(model.getComplaintHeading());
                 holder.tvComplaintContents.setText(model.getComplaintContent());
 

@@ -32,6 +32,7 @@ public class Db {
     static final String complaintsSubCollection = "Complaints";
     static final String feedbacksSubCollection = "Feedbacks";
 
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
