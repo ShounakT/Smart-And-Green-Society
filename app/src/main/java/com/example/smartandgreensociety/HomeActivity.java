@@ -38,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     Db db = new Db();
     Button btnAddResidents, btnCreatePoll, btnViewPolls, btnAddNotice, btnAddComplaint,
-            btnGiveFeedback;
+            btnGiveFeedback, btnUpdateSocietyInfo;
 
 
     @Override
@@ -73,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddNotice = findViewById(R.id.btnAddNotice);
         btnAddComplaint = findViewById(R.id.btnAddComplaint);
         btnGiveFeedback = findViewById(R.id.btnGiveFeedback);
+        btnUpdateSocietyInfo = findViewById(R.id.btnUpdateSocietyInfo);
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -123,6 +124,7 @@ public class HomeActivity extends AppCompatActivity {
             btnAddResidents.setVisibility(View.VISIBLE);
             btnCreatePoll.setVisibility(View.VISIBLE);
             btnAddNotice.setVisibility(View.VISIBLE);
+            btnUpdateSocietyInfo.setVisibility(View.VISIBLE);
         }
         if(Globals.user.getDesignation().equals("Resident")){
             btnViewPolls.setVisibility(View.VISIBLE);
@@ -178,7 +180,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
+        btnUpdateSocietyInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, UpdateSocietyInfoActivity.class));
+                HomeActivity.this.finish();
+            }
+        });
 
     }
 

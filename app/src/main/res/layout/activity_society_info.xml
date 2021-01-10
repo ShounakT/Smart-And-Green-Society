@@ -1,85 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SocietyInformation.SocietyInfoActivity">
-
-    <TextView
-        android:text="Society Information will appear here."
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="Society Information will appear here."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:text="Society Name:"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Society Name:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/societyName"
-        android:text="Abc Xyz."
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/societyName"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:text="Society's Secretary Name:"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Society's Contact:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/societySecretaryName"
-        android:text="Abc Xyz."
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/societyContact"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:text="Society's Chairman Name:"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Society's Secretary Name:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/societyChairmanName"
-        android:text="Abc Xyz."
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/societySecretaryName"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:text="Society's Contact Number:"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Society's Secretary Contact:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/societyContactNumber"
-        android:text="Abc Xyz."
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/societySecretaryContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Abc Xyz."
+                    android:textSize="24sp" />
 
-    <TextView
-        android:text="Society's Address:"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                <TextView
+                android:text="Society's Chairman Name:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/societyAddress"
-        android:text="Abc Xyz."
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/societyChairmanName"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-</LinearLayout>
+            <TextView
+                android:text="Society's Chairman Contact:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/societyChairmanContact"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Society's Treasurer Name:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/societyTreasurerName"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Society's Treasurer Contact:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/societyTreasurerContact"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+            <TextView
+                android:text="Society's Address:"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/societyAddress"
+                android:text="Abc Xyz."
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
