@@ -34,6 +34,7 @@ public class ResidentRegActivity extends AppCompatActivity {
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         db = new Db();
+        Globals.user = new User();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

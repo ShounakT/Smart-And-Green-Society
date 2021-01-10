@@ -35,6 +35,8 @@ public class SecretaryRegActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnSaveSecretary);
 
         firebaseUser = firebaseAuth.getCurrentUser();
+        Globals.society = new Society();
+        Globals.user = new User();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

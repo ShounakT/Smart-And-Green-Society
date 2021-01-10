@@ -179,7 +179,7 @@ public class Db {
                                 public void onSuccess(Void aVoid) {
 
                                     addMemberInSociety(documentReference,context);
-//                                    updateSocietyDetails(documentReference);
+                                    updateSocietyDetails(documentReference);
                                 }
                             });
 
@@ -288,6 +288,16 @@ public class Db {
 
     }
 
+    public void addSocietyInformation(Map societyInfoMap){
+
+        db
+                .collection("Societies")
+                .document(Globals.society.getSocietyRef())
+                .collection("SocietyInformation")
+                .add(societyInfoMap);
+
+
+    }
 
     public void voteInPoll(String pollId, String option){
         db.collection("Societies").document(Globals.user.getSocietyRef())

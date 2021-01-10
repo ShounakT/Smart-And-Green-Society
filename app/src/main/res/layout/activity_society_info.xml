@@ -14,6 +14,7 @@
 
     <TextView
         android:text="Society Name:"
+        android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -27,6 +28,7 @@
 
     <TextView
         android:text="Society's Secretary Name:"
+        android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -40,6 +42,7 @@
 
     <TextView
         android:text="Society's Chairman Name:"
+        android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -51,5 +54,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:text="Society's Contact Number:"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/societyContactNumber"
+        android:text="Abc Xyz."
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Society's Address:"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/societyAddress"
+        android:text="Abc Xyz."
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
