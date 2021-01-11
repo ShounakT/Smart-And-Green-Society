@@ -23,7 +23,7 @@ import com.example.smartandgreensociety.NoticeModule.NoticeBoardActivity;
 import com.example.smartandgreensociety.PollingModule.CreatePollActivity;
 import com.example.smartandgreensociety.PollingModule.PollsActivity;
 import com.example.smartandgreensociety.SocietyInformation.SocietyInfoActivity;
-import com.example.smartandgreensociety.UserAuth.SP;
+import com.example.smartandgreensociety.SocietyInformation.UpdateSocietyInfoActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

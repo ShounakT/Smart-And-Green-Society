@@ -3,6 +3,8 @@ package com.example.smartandgreensociety.DatabaseOperations;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.PollingModule.Poll;
 import com.example.smartandgreensociety.NoticeModule.Notice;
@@ -12,7 +14,9 @@ import com.example.smartandgreensociety.UserAuth.SP;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -290,11 +294,13 @@ public class Db {
 
     public void addSocietyInformation(Map societyInfoMap){
 
+        DocumentReference doc =
         db
                 .collection("Societies")
                 .document(Globals.society.getSocietyRef())
                 .collection("SocietyInformation")
-                .add(societyInfoMap);
+                .document();
+        doc.update(societyInfoMap);
 
 
     }
@@ -304,6 +310,24 @@ public class Db {
                 .collection(pollsSubCollection)
                 .document(pollId)
                 .update("options."+option, FieldValue.increment(1));
+    }
+
+    public DocumentSnapshot getSocietyInfo(){
+
+        final DocumentSnapshot[] societyInfoDoc = new DocumentSnapshot[1];
+        db.collection("Societies").document(Globals.user.getSocietyRef())
+            .collection("SocietyInformation")
+            .get()
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                    DocumentSnapshot userDocSnap = queryDocumentSnapshots.getDocuments().get(0);
+                    societyInfoDoc[0] = userDocSnap;
+                }
+            });
+        DocumentSnapshot ds = societyInfoDoc[0];
+        return ds;
     }
 
     public FirestoreRecyclerOptions<Poll> getPollsRecyclerOptions(){
