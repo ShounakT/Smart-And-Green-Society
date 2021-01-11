@@ -25,7 +25,6 @@
 
             <TextView
                 android:id="@+id/tvSocietyName"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -39,7 +38,6 @@
 
             <TextView
                 android:id="@+id/tvSocietyContact"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -53,7 +51,6 @@
 
             <TextView
                 android:id="@+id/tvSocietySecretaryName"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -69,7 +66,6 @@
                     android:id="@+id/tvSocietySecretaryContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Abc Xyz."
                     android:textSize="24sp" />
 
                 <TextView
@@ -81,7 +77,6 @@
 
             <TextView
                 android:id="@+id/tvSocietyChairmanName"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -95,7 +90,6 @@
 
             <TextView
                 android:id="@+id/tvSocietyChairmanContact"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -109,7 +103,6 @@
 
             <TextView
                 android:id="@+id/tvSocietyTreasurerName"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -123,7 +116,6 @@
 
             <TextView
                 android:id="@+id/tvSocietyTreasurerContact"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -139,7 +131,6 @@
 
             <TextView
                 android:id="@+id/tvSocietyAddress"
-                android:text="Abc Xyz."
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

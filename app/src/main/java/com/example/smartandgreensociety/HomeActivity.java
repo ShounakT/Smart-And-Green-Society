@@ -51,14 +51,6 @@ public class HomeActivity extends AppCompatActivity {
         t = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
         nv = findViewById(R.id.nav_view);
 
-        if (Globals.user.getSocietyRef() == null || Globals.user.getSocietyRef().equals("")){
-            // Not in society
-            nv.inflateMenu(R.menu.not_in_society_nav_menu);
-        } else {
-            // In Society
-            nv.inflateMenu(R.menu.in_society_nav_menu);
-        }
-
         View headerview = nv.getHeaderView(0);
         TextView navUserName = headerview.findViewById(R.id.navUserName);
         TextView navUserEmail = headerview.findViewById(R.id.navUserEmail);
@@ -117,6 +109,13 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
         ////////////////////////////////////////////////////////////////////////////////////////
+        if (Globals.user.getSocietyRef() == null || Globals.user.getSocietyRef().equals("")){
+            // Not in society
+            nv.inflateMenu(R.menu.not_in_society_nav_menu);
+        } else {
+            // In Society
+            nv.inflateMenu(R.menu.in_society_nav_menu);
+        }
         navUserName.setText(firebaseUser.getDisplayName());
         navUserEmail.setText(firebaseUser.getEmail());
 

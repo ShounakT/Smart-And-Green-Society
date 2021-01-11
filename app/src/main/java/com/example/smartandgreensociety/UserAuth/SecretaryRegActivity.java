@@ -12,6 +12,7 @@ import com.example.smartandgreensociety.DatabaseOperations.Db;
 import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
+import com.example.smartandgreensociety.SocietyInformation.UpdateSocietyInfoActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -56,7 +57,7 @@ public class SecretaryRegActivity extends AppCompatActivity {
                 Map societyMap = Globals.society.toMapSociety();
                 db.createNewSociety(societyMap,getApplicationContext());
 
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), UpdateSocietyInfoActivity.class));
                 SecretaryRegActivity.this.finish();
 
             }

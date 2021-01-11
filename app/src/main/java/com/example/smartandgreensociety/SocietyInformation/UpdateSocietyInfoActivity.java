@@ -21,6 +21,7 @@ public class UpdateSocietyInfoActivity extends AppCompatActivity {
     Button btnUpdateSocInfo;
     SocietyInformation societyInformation = new SocietyInformation();
     Db db = new Db();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

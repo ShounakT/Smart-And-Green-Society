@@ -10,6 +10,7 @@ import com.example.smartandgreensociety.PollingModule.Poll;
 import com.example.smartandgreensociety.NoticeModule.Notice;
 import com.example.smartandgreensociety.ComplaintModule.SocietyComplaint;
 import com.example.smartandgreensociety.FeedbackModule.SocietyFeedback;
+import com.example.smartandgreensociety.SocietyInformation.SocietyInformation;
 import com.example.smartandgreensociety.UserAuth.SP;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
@@ -145,6 +146,7 @@ public class Db {
                     }
                 });
     }
+
     public void setSocietyDetailsGlobally(String sId, final globalSocietySet globalSocietySet){
 
         db
@@ -302,7 +304,6 @@ public class Db {
                 .document();
         doc.update(societyInfoMap);
 
-
     }
 
     public void voteInPoll(String pollId, String option){
@@ -312,9 +313,9 @@ public class Db {
                 .update("options."+option, FieldValue.increment(1));
     }
 
-    public DocumentSnapshot getSocietyInfo(){
 
-        final DocumentSnapshot[] societyInfoDoc = new DocumentSnapshot[1];
+    public void getSocietyInfo(final societyInfoFetch societyInfoFetch){
+
         db.collection("Societies").document(Globals.user.getSocietyRef())
             .collection("SocietyInformation")
             .get()
@@ -323,11 +324,12 @@ public class Db {
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
                     DocumentSnapshot userDocSnap = queryDocumentSnapshots.getDocuments().get(0);
-                    societyInfoDoc[0] = userDocSnap;
+                    societyInfoFetch.fetched(userDocSnap.toObject(SocietyInformation.class));
+
+
                 }
             });
-        DocumentSnapshot ds = societyInfoDoc[0];
-        return ds;
+
     }
 
     public FirestoreRecyclerOptions<Poll> getPollsRecyclerOptions(){
@@ -360,6 +362,10 @@ public class Db {
 
     public interface globalSocietySet {
         void detailsSet();
+    }
+
+    public interface societyInfoFetch {
+        void fetched(SocietyInformation societyInformation);
     }
 
 }

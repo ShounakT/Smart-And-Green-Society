@@ -40,26 +40,22 @@ public class SocietyInfoActivity extends AppCompatActivity {
         tvSocietyTreasurerContact = findViewById(R.id.tvSocietyTreasurerContact);
 
 
-        DocumentSnapshot societyInfoDoc = db.getSocietyInfo();
-        String societyName = societyInfoDoc.getString("societyName");
-        String societyContact = societyInfoDoc.getString("societyContact");
-        String societySecretaryName = societyInfoDoc.getString("societySecretaryName");
-        String societySecretaryContact = societyInfoDoc.getString("societySecretaryContact");
-        String societyChairmanName = societyInfoDoc.getString("societyChairmanName");
-        String societyChairmanContact = societyInfoDoc.getString("societyChairmanContact");
-        String societyTreasurerName = societyInfoDoc.getString("societyTreasurerName");
-        String societyTreasurerContact = societyInfoDoc.getString("societyTreasurerContact");
-        String societyAddress = societyInfoDoc.getString("societyAddress");
+        db.getSocietyInfo(new Db.societyInfoFetch() {
+            @Override
+            public void fetched(SocietyInformation si) {
 
-        tvSocietyName.setText(societyName);
-        tvSocietyContact.setText(societyContact);
-        tvSocietyAddress.setText(societyAddress);
-        tvSocietySecretaryName.setText(societySecretaryName);
-        tvSocietySecretaryContact.setText(societySecretaryContact);
-        tvSocietyChairmanName.setText(societyChairmanName);
-        tvSocietyChairmanContact.setText(societyChairmanContact);
-        tvSocietyTreasurerName.setText(societyTreasurerName);
-        tvSocietyTreasurerContact.setText(societyTreasurerContact);
+                tvSocietyName.setText(si.getSocietyName());
+                tvSocietyContact.setText(si.getSocietyContact());
+                tvSocietyAddress.setText(si.getSocietyAddress());
+                tvSocietySecretaryName.setText(si.getSocietySecretaryName());
+                tvSocietySecretaryContact.setText(si.getSocietySecretaryContact());
+                tvSocietyChairmanName.setText(si.getSocietyChairmanName());
+                tvSocietyChairmanContact.setText(si.getSocietyChairmanContact());
+                tvSocietyTreasurerName.setText(si.getSocietyTreasurerName());
+                tvSocietyTreasurerContact.setText(si.getSocietyTreasurerContact());
+
+            }
+        });
 
     }
 }
