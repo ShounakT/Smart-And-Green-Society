@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.example.smartandgreensociety.DatabaseOperations.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
+import com.example.smartandgreensociety.UserProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,9 @@ public class CreatePollActivity extends AppCompatActivity {
     EditText etPollQuestion;
     Button btnCreate;
     Db db = new Db();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

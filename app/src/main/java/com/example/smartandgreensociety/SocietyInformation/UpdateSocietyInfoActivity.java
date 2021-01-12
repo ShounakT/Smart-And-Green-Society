@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.example.smartandgreensociety.DatabaseOperations.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
+import com.example.smartandgreensociety.UserProfileActivity;
 
 import java.util.Map;
 
@@ -21,6 +22,8 @@ public class UpdateSocietyInfoActivity extends AppCompatActivity {
     Button btnUpdateSocInfo;
     SocietyInformation societyInformation = new SocietyInformation();
     Db db = new Db();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
 import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
+import com.example.smartandgreensociety.UserProfileActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -25,6 +27,8 @@ public class PollsActivity extends AppCompatActivity {
 
     FirestoreRecyclerAdapter adapter;
     Db db = new Db();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

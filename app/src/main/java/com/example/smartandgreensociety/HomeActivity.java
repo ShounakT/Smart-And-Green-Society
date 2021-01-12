@@ -118,15 +118,25 @@ public class HomeActivity extends AppCompatActivity {
         }
         navUserName.setText(firebaseUser.getDisplayName());
         navUserEmail.setText(firebaseUser.getEmail());
+        String societyRef = Globals.user.getSocietyRef();
 
-        if(Globals.user.getDesignation().equals("Secretary")){
+        if(Globals.user.getDesignation().equals("Secretary") && societyRef != null){
+
             btnAddResidents.setVisibility(View.VISIBLE);
             btnCreatePoll.setVisibility(View.VISIBLE);
             btnAddNotice.setVisibility(View.VISIBLE);
             btnUpdateSocietyInfo.setVisibility(View.VISIBLE);
+            btnAddComplaint.setVisibility(View.VISIBLE);
+            btnGiveFeedback.setVisibility(View.VISIBLE);
+
         }
-        if(Globals.user.getDesignation().equals("Resident")){
+
+        if(Globals.user.getDesignation().equals("Resident") && societyRef != null){
+
             btnViewPolls.setVisibility(View.VISIBLE);
+            btnAddComplaint.setVisibility(View.VISIBLE);
+            btnGiveFeedback.setVisibility(View.VISIBLE);
+
         }
 
         btnAddResidents.setOnClickListener(new View.OnClickListener() {

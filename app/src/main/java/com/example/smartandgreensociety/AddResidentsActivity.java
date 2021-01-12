@@ -16,6 +16,8 @@ public class AddResidentsActivity extends AppCompatActivity {
     Button btnAdd;
     Db db = new Db();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

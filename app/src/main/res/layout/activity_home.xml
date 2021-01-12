@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:text="Add Notice"/>
         <Button
+            android:visibility="gone"
             android:text="Add Complaint"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
@@ -66,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:visibility="gone"
             android:text="Give Feedback"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
