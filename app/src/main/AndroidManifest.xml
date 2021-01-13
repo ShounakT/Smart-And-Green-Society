@@ -9,7 +9,10 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
-        <activity android:name=".SocietyInformation.UpdateSocietyInfoActivity"></activity>
+        <activity android:name=".RulesAndRegulations.SocietyRulesActivity"></activity>
+        <activity android:name=".RulesAndRegulations.UpdateRulRegActivity" />
+        <activity android:name=".UpdateRullRegActivity" />
+        <activity android:name=".SocietyInformation.UpdateSocietyInfoActivity" />
         <activity android:name=".ComplaintModule.AddComplaintActivity" />
         <activity android:name=".FeedbackModule.AddFeedbackActivity" />
         <activity android:name=".FeedbackModule.SocietyFeedbackActivity" />

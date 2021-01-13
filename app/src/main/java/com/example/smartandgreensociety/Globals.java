@@ -11,6 +11,5 @@ public class Globals {
     public static User user;
     public static Society society;
     public static Poll poll;
-    public static SocietyInformation societyInformation;
 
 }

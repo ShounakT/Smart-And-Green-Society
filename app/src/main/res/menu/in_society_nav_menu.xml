@@ -11,6 +11,9 @@
     <item android:id="@+id/societyInfo"
         android:icon="@drawable/society_info"
         android:title="Society Info"/>
+    <item android:id="@+id/societyRules"
+        android:icon="@drawable/society_rules"
+        android:title="Society Rules."/>
     <item android:id="@+id/societyComplaints"
         android:icon="@drawable/society_complaint"
         android:title="Society Complaints"/>

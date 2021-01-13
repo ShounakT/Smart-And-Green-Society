@@ -22,6 +22,8 @@ import com.example.smartandgreensociety.NoticeModule.AddNoticeActivity;
 import com.example.smartandgreensociety.NoticeModule.NoticeBoardActivity;
 import com.example.smartandgreensociety.PollingModule.CreatePollActivity;
 import com.example.smartandgreensociety.PollingModule.PollsActivity;
+import com.example.smartandgreensociety.RulesAndRegulations.SocietyRulesActivity;
+import com.example.smartandgreensociety.RulesAndRegulations.UpdateRulRegActivity;
 import com.example.smartandgreensociety.SocietyInformation.SocietyInfoActivity;
 import com.example.smartandgreensociety.SocietyInformation.UpdateSocietyInfoActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -38,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     Db db = new Db();
     Button btnAddResidents, btnCreatePoll, btnViewPolls, btnAddNotice, btnAddComplaint,
-            btnGiveFeedback, btnUpdateSocietyInfo;
+            btnGiveFeedback, btnUpdateSocietyInfo, btnUpdateSocietyRules;
 
 
     @Override
@@ -66,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddComplaint = findViewById(R.id.btnAddComplaint);
         btnGiveFeedback = findViewById(R.id.btnGiveFeedback);
         btnUpdateSocietyInfo = findViewById(R.id.btnUpdateSocietyInfo);
+        btnUpdateSocietyRules = findViewById(R.id.btnUpdateSocietyRules);
 
         nv.setNavigationItemSelectedListener(item -> {
 
@@ -105,6 +108,13 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), SocietyFeedbackActivity.class));
                     this.finish();
                     break;
+
+                case R.id.societyRules:
+                    Toast.makeText(HomeActivity.this,"Welcome To Society Rules!",
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), SocietyRulesActivity.class));
+                    this.finish();
+                    break;
             }
             return false;
         });
@@ -128,6 +138,7 @@ public class HomeActivity extends AppCompatActivity {
             btnUpdateSocietyInfo.setVisibility(View.VISIBLE);
             btnAddComplaint.setVisibility(View.VISIBLE);
             btnGiveFeedback.setVisibility(View.VISIBLE);
+            btnUpdateSocietyRules.setVisibility(View.VISIBLE);
 
         }
 
@@ -197,9 +208,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        btnUpdateSocietyRules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, UpdateRulRegActivity.class));
+                HomeActivity.this.finish();
+            }
+        });
+
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

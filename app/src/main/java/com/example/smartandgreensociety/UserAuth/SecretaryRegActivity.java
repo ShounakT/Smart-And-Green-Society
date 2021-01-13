@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.smartandgreensociety.DatabaseOperations.Db;
 import com.example.smartandgreensociety.Globals;
@@ -55,10 +56,16 @@ public class SecretaryRegActivity extends AppCompatActivity {
                 db.createNewUser(userMap, getApplicationContext());
 
                 Map societyMap = Globals.society.toMapSociety();
-                db.createNewSociety(societyMap,getApplicationContext());
+                db.createNewSociety(societyMap, getApplicationContext(), new Db.societyCreated() {
+                    @Override
+                    public void societyCreated() {
+                        Toast.makeText(getApplicationContext(), "Registration Successful!",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                        SecretaryRegActivity.this.finish();
+                    }
+                });
 
-                startActivity(new Intent(getApplicationContext(), UpdateSocietyInfoActivity.class));
-                SecretaryRegActivity.this.finish();
+
 
             }
         });

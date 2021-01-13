@@ -83,7 +83,7 @@ public class Db {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Registeration Successful!",Toast.LENGTH_SHORT).show();
+
 
                     }
                 });
@@ -167,7 +167,7 @@ public class Db {
                 });
     }
 
-    public void createNewSociety(Map newSocietyMap,Context context){
+    public void createNewSociety(Map newSocietyMap,Context context,final societyCreated societyCreated){
 
         DocumentReference documentReference =
         db
@@ -183,23 +183,38 @@ public class Db {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    addMemberInSociety(documentReference, context, new memberAddedInSociety() {
+                                        @Override
+                                        public void added() {
+                                            updateSocietyDetails(documentReference, new societyRefInUserDocSet() {
+                                                @Override
+                                                public void done() {
+                                                    documentReference.collection("SocietyInformation").document("SocietyInformation");
+                                                    societyCreated.societyCreated();
+                                                }
+                                            });
+                                        }
+                                    });
 
-                                    addMemberInSociety(documentReference,context);
-                                    updateSocietyDetails(documentReference);
                                 }
                             });
 
     }
 
-    private void updateSocietyDetails(DocumentReference documentReference) {
+    private void updateSocietyDetails(DocumentReference documentReference,final societyRefInUserDocSet societyRefInUserDocSet) {
         Map societyMap = Globals.society.toMapSociety();
 
         documentReference
-
-                .update(societyMap);
+                .update(societyMap)
+                .addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        societyRefInUserDocSet.done();
+                    }
+                });
     }
 
-    public void addMemberInSociety(DocumentReference sId,Context context){
+    public void addMemberInSociety(DocumentReference sId,Context context, final memberAddedInSociety memberAddedInSociety){
 
         Globals.user.setSocietyRef(sId.getId());
         updateUserDetails();
@@ -210,7 +225,7 @@ public class Db {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
 
-
+                        memberAddedInSociety.added();
                     }
                 });
     }
@@ -296,13 +311,24 @@ public class Db {
 
     public void addSocietyInformation(Map societyInfoMap){
 
-        DocumentReference doc =
         db
                 .collection("Societies")
                 .document(Globals.society.getSocietyRef())
                 .collection("SocietyInformation")
-                .document();
-        doc.update(societyInfoMap);
+                .document("SocietyInformation")
+                .set(societyInfoMap);
+
+
+    }
+
+    public void addSocietyRules(String rules){
+
+        DocumentReference documentRef =
+        db
+                .collection("Societies")
+                .document(Globals.user.getSocietyRef());
+
+        documentRef.update("rules",rules);
 
     }
 
@@ -326,9 +352,25 @@ public class Db {
                     DocumentSnapshot userDocSnap = queryDocumentSnapshots.getDocuments().get(0);
                     societyInfoFetch.fetched(userDocSnap.toObject(SocietyInformation.class));
 
-
                 }
             });
+    }
+
+    public void getSocietyRules(final societyRulesFetch societyRulesFetch){
+
+
+        db
+                .collection("Societies")
+                .document(Globals.user.getSocietyRef())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        societyRulesFetch.fetchedRules(documentSnapshot.getString("rules"));
+                    }
+                });
+
 
     }
 
@@ -366,6 +408,22 @@ public class Db {
 
     public interface societyInfoFetch {
         void fetched(SocietyInformation societyInformation);
+    }
+
+    public interface societyRulesFetch{
+        void fetchedRules(String rules);
+    }
+
+    public interface societyCreated {
+        void societyCreated();
+    }
+
+    public interface societyRefInUserDocSet {
+        void done();
+    }
+
+    public interface memberAddedInSociety {
+        void added();
     }
 
 }
