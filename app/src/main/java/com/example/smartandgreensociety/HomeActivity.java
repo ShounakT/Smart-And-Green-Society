@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartandgreensociety.AlertSystem.CreateAlertActivity;
 import com.example.smartandgreensociety.ComplaintModule.AddComplaintActivity;
 import com.example.smartandgreensociety.ComplaintModule.SocietyComplaintActivity;
 import com.example.smartandgreensociety.DatabaseOperations.Db;
@@ -115,9 +116,17 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), SocietyRulesActivity.class));
                     this.finish();
                     break;
+
+                case R.id.societyAlert:
+                    Toast.makeText(HomeActivity.this,"Welcome To Alert Section!",
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), CreateAlertActivity.class));
+                    this.finish();
+                    break;
             }
             return false;
         });
+
         ////////////////////////////////////////////////////////////////////////////////////////
         if (Globals.user.getSocietyRef() == null || Globals.user.getSocietyRef().equals("")){
             // Not in society

@@ -25,6 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.List;
@@ -112,7 +113,12 @@ public class Db {
                         if (documentSnapshot.getString("societyRef") == null || documentSnapshot.getString("societyRef").equals("")){
                             globalUserSet.detailsSet();
                             return;
+                        }else{
+
+                            FirebaseMessaging.getInstance().subscribeToTopic(Globals.user.getSocietyRef());
+
                         }
+
 
                         setSocietyDetailsGlobally(documentSnapshot.getString("societyRef"), new globalSocietySet() {
                             @Override

@@ -45,6 +45,7 @@ public class AddComplaintActivity extends AppCompatActivity {
                 db.addComplaint(societyComplaintMap);
                 startActivity(new Intent(AddComplaintActivity.this, HomeActivity.class));
                 AddComplaintActivity.this.finish();
+
             }
         });
     }
