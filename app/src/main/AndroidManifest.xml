@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
         <service
-            android:name=".FCMService"
+            android:name=".AlertSystem.FCMService"
             android:enabled="false"
             android:exported="false">
             <intent-filter>
