@@ -9,12 +9,14 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAndGreenSociety">
+        <activity android:name=".MakePaymentActivity"></activity>
+
         <service
             android:name=".AlertSystem.FCMService"
             android:enabled="false"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
