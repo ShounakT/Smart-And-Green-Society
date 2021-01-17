@@ -2,6 +2,7 @@ package com.example.smartandgreensociety.AlertSystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +26,7 @@ public class CreateAlertActivity extends AppCompatActivity {
 
     Button btnNotify;
     private String FCM_API = "http://fcm.googleapis.com/fcm/send";
-    private String serverKey = "key=" + "";
-    private String contentType = "application/json";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,35 +39,21 @@ public class CreateAlertActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-                JSONObject notification = new JSONObject();
-                JSONObject notificationBody = new JSONObject();
+                JSONObject jsonObject = new JSONObject();
+                JsonObjectRequest jsonObjectRequest;
 
                 try {
-                        notificationBody.put("title", "Emergency Alert");
-                        notificationBody.put("message ","There's an emergency in the " +
+                        jsonObject.put("title", "Emergency Alert");
+                        jsonObject.put("message ","There's an emergency in the " +
                                 "society. ");
-                        notification.put("to", Globals.user.getSocietyRef());
-                        notification.put("data",notificationBody);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                JsonObjectRequest jsonObjectRequest =
-                        new JsonObjectRequest(FCM_API, notification,
-                                new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
 
-                                    }
-                                }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
 
-                            }
-                        });
+
 
             }
         });
