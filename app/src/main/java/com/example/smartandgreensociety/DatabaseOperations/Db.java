@@ -184,6 +184,8 @@ public class Db {
         Globals.society.setSocietyRef(documentReference.getId());
         Globals.society.setSocietyName(newSocietyMap.get("societyName").toString());
 
+        FirebaseMessaging.getInstance().subscribeToTopic(documentReference.getId());
+
         documentReference
                             .set(newSocietyMap)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
