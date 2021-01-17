@@ -21,6 +21,7 @@ import com.example.smartandgreensociety.FeedbackModule.AddFeedbackActivity;
 import com.example.smartandgreensociety.FeedbackModule.SocietyFeedbackActivity;
 import com.example.smartandgreensociety.NoticeModule.AddNoticeActivity;
 import com.example.smartandgreensociety.NoticeModule.NoticeBoardActivity;
+import com.example.smartandgreensociety.Payment.MakePaymentActivity;
 import com.example.smartandgreensociety.PollingModule.CreatePollActivity;
 import com.example.smartandgreensociety.PollingModule.PollsActivity;
 import com.example.smartandgreensociety.RulesAndRegulations.SocietyRulesActivity;
@@ -121,6 +122,13 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(HomeActivity.this,"Welcome To Alert Section!",
                             Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), CreateAlertActivity.class));
+                    this.finish();
+                    break;
+
+                case R.id.societyPayment:
+                    Toast.makeText(HomeActivity.this,"Welcome To Payment Section!",
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), MakePaymentActivity.class));
                     this.finish();
                     break;
             }

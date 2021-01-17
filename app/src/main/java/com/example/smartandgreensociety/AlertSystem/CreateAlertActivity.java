@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.VoiceInteractor;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.smartandgreensociety.ComplaintModule.SocietyComplaintActivity;
 import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
 import com.google.android.gms.common.internal.GmsLogger;
 import com.google.gson.JsonObject;
@@ -38,9 +41,17 @@ public class CreateAlertActivity extends AppCompatActivity {
     private String TAG = "AlertSystem";
 
     @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        CreateAlertActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_alert);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnNotify = findViewById(R.id.btnNotify);
 

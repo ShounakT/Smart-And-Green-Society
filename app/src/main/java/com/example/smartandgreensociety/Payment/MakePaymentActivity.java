@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety;
+package com.example.smartandgreensociety.Payment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.smartandgreensociety.HomeActivity;
+import com.example.smartandgreensociety.R;
+
 import java.util.ArrayList;
 
 public class MakePaymentActivity extends AppCompatActivity {
@@ -23,10 +26,19 @@ public class MakePaymentActivity extends AppCompatActivity {
     Button send;
     String TAG ="main";
     final int UPI_PAYMENT = 0;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        MakePaymentActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_payment);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
             send = (Button) findViewById(R.id.send);

@@ -20,6 +20,9 @@
     <item android:id="@+id/societyFeedback"
         android:icon="@drawable/society_feedback"
         android:title="Society Feedback"/>
+    <item android:id="@+id/societyPayment"
+        android:icon="@drawable/society_payment"
+        android:title="Make Payment"/>
     <item android:id="@+id/societyAlert"
         android:icon="@drawable/society_alert"
         android:title="Alert Society"/>
