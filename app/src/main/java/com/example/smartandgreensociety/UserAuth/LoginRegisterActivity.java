@@ -40,7 +40,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
         if(firebaseUser == null) {
             // User Is Not Registered OR Registered, But Not Signed In
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-                    .setAvailableProviders(provider).setIsSmartLockEnabled(false)
+                    .setAvailableProviders(provider)
+                    .setTheme(R.style.Theme_SmartAndGreenSociety).setIsSmartLockEnabled(false)
                     .build(), AuthUI_Req_Code);
         }else{
             //User Is Registered & Opened app

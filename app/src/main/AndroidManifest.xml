@@ -37,7 +37,7 @@
         <activity android:name=".UserAuth.LoginRegisterActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
