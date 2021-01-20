@@ -156,6 +156,7 @@ public class HomeActivity extends AppCompatActivity {
             btnAddComplaint.setVisibility(View.VISIBLE);
             btnGiveFeedback.setVisibility(View.VISIBLE);
             btnUpdateSocietyRules.setVisibility(View.VISIBLE);
+            btnViewPolls.setVisibility(View.VISIBLE);
 
         }
 

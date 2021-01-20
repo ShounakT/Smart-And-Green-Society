@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.Globals;
+import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -26,12 +27,18 @@ public class PollsActivity extends AppCompatActivity {
     FirestoreRecyclerAdapter adapter;
     Db db = new Db();
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        PollsActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polls2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

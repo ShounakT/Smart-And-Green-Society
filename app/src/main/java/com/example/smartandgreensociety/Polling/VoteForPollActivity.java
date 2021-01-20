@@ -15,11 +15,15 @@ import com.example.smartandgreensociety.R;
 public class VoteForPollActivity extends AppCompatActivity {
 
     Db db  = new Db();
+    TextView tvVotesYes,tvVotesNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote_for_poll);
+
+        tvVotesYes = findViewById(R.id.numberOfYes);
+        tvVotesNo = findViewById(R.id.numberOfNo);
 
         Poll poll = Globals.poll;
 
@@ -42,5 +46,9 @@ public class VoteForPollActivity extends AppCompatActivity {
                 VoteForPollActivity.this.finish();
             }
         });
+
+
+        tvVotesYes.setText("Number of positive votes:"+poll.getOptions().get("Yes"));
+        tvVotesNo.setText("Number of negative votes:"+poll.getOptions().get("No"));
     }
 }
