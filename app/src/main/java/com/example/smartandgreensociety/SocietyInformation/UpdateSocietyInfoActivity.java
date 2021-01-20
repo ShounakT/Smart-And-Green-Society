@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.example.smartandgreensociety.UserProfileActivity;
 
 import java.util.Map;
 
@@ -23,12 +22,19 @@ public class UpdateSocietyInfoActivity extends AppCompatActivity {
     SocietyInformation societyInformation = new SocietyInformation();
     Db db = new Db();
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        UpdateSocietyInfoActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_society_info);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etSocietysName = findViewById(R.id.etSocietysName);
         etSocietysContact = findViewById(R.id.etSocietysContact);

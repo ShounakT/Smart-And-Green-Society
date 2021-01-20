@@ -1,23 +1,17 @@
-package com.example.smartandgreensociety.DatabaseOperations;
+package com.example.smartandgreensociety.Database;
 
 import android.content.Context;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.example.smartandgreensociety.Globals;
-import com.example.smartandgreensociety.PollingModule.Poll;
-import com.example.smartandgreensociety.NoticeModule.Notice;
-import com.example.smartandgreensociety.ComplaintModule.SocietyComplaint;
-import com.example.smartandgreensociety.FeedbackModule.SocietyFeedback;
+import com.example.smartandgreensociety.Polling.Poll;
+import com.example.smartandgreensociety.Notice.Notice;
+import com.example.smartandgreensociety.Complaint.SocietyComplaint;
+import com.example.smartandgreensociety.Feedback.SocietyFeedback;
 import com.example.smartandgreensociety.SocietyInformation.SocietyInformation;
-import com.example.smartandgreensociety.UserAuth.SP;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;

@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.AlertSystem;
+package com.example.smartandgreensociety.Alert;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 

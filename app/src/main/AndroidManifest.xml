@@ -12,7 +12,7 @@
         <activity android:name=".Payment.MakePaymentActivity"></activity>
 
         <service
-            android:name=".AlertSystem.FCMService"
+            android:name=".Alert.FCMService"
             android:enabled="false"
             android:exported="false">
             <intent-filter>
@@ -20,19 +20,19 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".AlertSystem.CreateAlertActivity" />
+        <activity android:name=".Alert.CreateAlertActivity" />
         <activity android:name=".RulesAndRegulations.SocietyRulesActivity" />
         <activity android:name=".RulesAndRegulations.UpdateRulRegActivity" />
         <activity android:name=".SocietyInformation.UpdateSocietyInfoActivity" />
-        <activity android:name=".ComplaintModule.AddComplaintActivity" />
-        <activity android:name=".FeedbackModule.AddFeedbackActivity" />
-        <activity android:name=".FeedbackModule.SocietyFeedbackActivity" />
-        <activity android:name=".ComplaintModule.SocietyComplaintActivity" />
+        <activity android:name=".Complaint.AddComplaintActivity"/>
+        <activity android:name=".Feedback.AddFeedbackActivity" />
+        <activity android:name=".Feedback.SocietyFeedbackActivity" />
+        <activity android:name=".Complaint.SocietyComplaintActivity" />
         <activity android:name=".SocietyInformation.SocietyInfoActivity" />
-        <activity android:name=".NoticeModule.AddNoticeActivity" />
-        <activity android:name=".PollingModule.CreatePollActivity" />
-        <activity android:name=".PollingModule.VoteForPollActivity" />
-        <activity android:name=".PollingModule.PollsActivity" />
+        <activity android:name=".Notice.AddNoticeActivity" />
+        <activity android:name=".Polling.CreatePollActivity" />
+        <activity android:name=".Polling.VoteForPollActivity" />
+        <activity android:name=".Polling.PollsActivity" />
         <activity android:name=".AddResidentsActivity" />
         <activity android:name=".UserAuth.LoginRegisterActivity" />
         <activity
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserProfileActivity" />
-        <activity android:name=".NoticeModule.NoticeBoardActivity" />
+        <activity android:name=".Notice.NoticeBoardActivity" />
         <activity android:name=".UserAuth.SecretaryRegActivity" />
         <activity android:name=".UserAuth.ResidentRegActivity" />
         <activity android:name=".UserAuth.ResSecActivity" />

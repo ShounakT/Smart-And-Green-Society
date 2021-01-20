@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class SocietyInfoActivity extends AppCompatActivity {
 

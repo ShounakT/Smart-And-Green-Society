@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 
 public class AddResidentsActivity extends AppCompatActivity {
 
@@ -16,12 +16,18 @@ public class AddResidentsActivity extends AppCompatActivity {
     Button btnAdd;
     Db db = new Db();
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        AddResidentsActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_residents);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etResidentEmail = findViewById(R.id.etResidentEmail);
         btnAdd = findViewById(R.id.btnAdd);

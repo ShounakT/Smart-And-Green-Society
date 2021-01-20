@@ -9,11 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.example.smartandgreensociety.SocietyInformation.UpdateSocietyInfoActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.NoticeModule;
+package com.example.smartandgreensociety.Notice;
 
 import java.io.Serializable;
 import java.util.HashMap;

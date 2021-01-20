@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;

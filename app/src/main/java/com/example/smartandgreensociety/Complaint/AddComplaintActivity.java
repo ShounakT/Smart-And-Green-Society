@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.ComplaintModule;
+package com.example.smartandgreensociety.Complaint;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.example.smartandgreensociety.UserProfileActivity;
 
 import java.util.Map;
 
@@ -22,12 +21,18 @@ public class AddComplaintActivity extends AppCompatActivity {
     SocietyComplaint societyComplaint = new SocietyComplaint();
     Db db = new Db();
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        AddComplaintActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_complaint);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etComplaintTitle = findViewById(R.id.etComplaintTitle);
         etComplaintContent = findViewById(R.id.etComplaintContent);

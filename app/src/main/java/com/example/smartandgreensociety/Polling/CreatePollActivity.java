@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.PollingModule;
+package com.example.smartandgreensociety.Polling;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.example.smartandgreensociety.UserProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +21,18 @@ public class CreatePollActivity extends AppCompatActivity {
     Button btnCreate;
     Db db = new Db();
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        CreatePollActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_poll);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etPollQuestion = findViewById(R.id.etPollQuestion);
         btnCreate = findViewById(R.id.btnConfirmPoll);

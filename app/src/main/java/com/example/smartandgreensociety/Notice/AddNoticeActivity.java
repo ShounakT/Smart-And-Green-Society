@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.NoticeModule;
+package com.example.smartandgreensociety.Notice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.example.smartandgreensociety.UserProfileActivity;
 
 import java.util.Map;
 
@@ -22,12 +21,18 @@ public class AddNoticeActivity extends AppCompatActivity {
     Notice notice = new Notice();
     Db db = new Db();
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        AddNoticeActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_notice);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etNoticeContent = findViewById(R.id.etNoticeContent);
         btnSubmitNotice = findViewById(R.id.btnSubmitNotice);

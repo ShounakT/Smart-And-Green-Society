@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.FeedbackModule;
+package com.example.smartandgreensociety.Feedback;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.example.smartandgreensociety.UserProfileActivity;
 
 import java.util.Map;
 
@@ -22,12 +21,18 @@ public class AddFeedbackActivity extends AppCompatActivity {
     SocietyFeedback societyFeedback = new SocietyFeedback();
     Db db = new Db();
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        AddFeedbackActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_feedback);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etFeedbackTitle = findViewById(R.id.etFeedbackTitle);
         etFeedbackContent = findViewById(R.id.etFeedbackContent);

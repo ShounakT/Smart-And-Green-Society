@@ -1,7 +1,6 @@
 package com.example.smartandgreensociety;
 
-import com.example.smartandgreensociety.PollingModule.Poll;
-import com.example.smartandgreensociety.SocietyInformation.SocietyInformation;
+import com.example.smartandgreensociety.Polling.Poll;
 import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
 

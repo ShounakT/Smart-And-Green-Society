@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.FeedbackModule;
+package com.example.smartandgreensociety.Feedback;
 
 import java.util.HashMap;
 import java.util.Map;

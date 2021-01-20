@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartandgreensociety.DatabaseOperations.Db;
+import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
-import com.example.smartandgreensociety.SocietyInformation.SocietyInfoActivity;
 
 public class UpdateRulRegActivity extends AppCompatActivity {
 
@@ -19,12 +18,18 @@ public class UpdateRulRegActivity extends AppCompatActivity {
     Button btnUpdateRulReg;
     Db db = new Db();
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        UpdateRulRegActivity.this.finish();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_rul_reg);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etRulReg = findViewById(R.id.etRulReg);
         btnUpdateRulReg = findViewById(R.id.btnUpdateSocietyRules);

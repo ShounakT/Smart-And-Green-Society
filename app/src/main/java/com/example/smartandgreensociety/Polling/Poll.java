@@ -1,4 +1,4 @@
-package com.example.smartandgreensociety.PollingModule;
+package com.example.smartandgreensociety.Polling;
 
 import java.io.Serializable;
 import java.util.Map;
