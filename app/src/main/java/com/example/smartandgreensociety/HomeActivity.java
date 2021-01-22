@@ -3,6 +3,7 @@ package com.example.smartandgreensociety;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
@@ -41,8 +42,8 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     Db db = new Db();
-    Button btnAddResidents, btnCreatePoll, btnViewPolls, btnAddNotice, btnAddComplaint,
-            btnGiveFeedback, btnUpdateSocietyInfo, btnUpdateSocietyRules;
+    CardView btnAddResidents,btnCreatePoll, btnViewPolls, btnAddNotice, btnAddComplaint,
+            btnGiveFeedback, btnUpdateSocietyInfo, btnUpdateSocietyRules;;
 
 
     @Override
