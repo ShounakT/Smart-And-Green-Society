@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,26 +44,32 @@ public class SecretaryRegActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String societyName = etSocietyName.getText().toString().trim();
-                Globals.society.setSocietyName(societyName);
-                Globals.user.setName(firebaseUser.getDisplayName());
-                Globals.user.setDesignation("Secretary");
-                Globals.user.setEmail(firebaseUser.getEmail());
-                Globals.user.setUid(firebaseUser.getUid());
-                Globals.user.setPhone(userPhone.getText().toString().trim());
+                if(TextUtils.isEmpty(etSocietyName.getText().toString()) || TextUtils.isEmpty(userPhone.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please Enter All Fields!",Toast.LENGTH_SHORT).show();
+                }else {
 
-                Map userMap = Globals.user.toMapSecretary();
-                db.createNewUser(userMap, getApplicationContext());
 
-                Map societyMap = Globals.society.toMapSociety();
-                db.createNewSociety(societyMap, getApplicationContext(), new Db.societyCreated() {
-                    @Override
-                    public void societyCreated() {
-                        Toast.makeText(getApplicationContext(), "Registration Successful!",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                        SecretaryRegActivity.this.finish();
-                    }
-                });
+                    String societyName = etSocietyName.getText().toString().trim();
+                    Globals.society.setSocietyName(societyName);
+                    Globals.user.setName(firebaseUser.getDisplayName());
+                    Globals.user.setDesignation("Secretary");
+                    Globals.user.setEmail(firebaseUser.getEmail());
+                    Globals.user.setUid(firebaseUser.getUid());
+                    Globals.user.setPhone(userPhone.getText().toString().trim());
+
+                    Map userMap = Globals.user.toMapSecretary();
+                    db.createNewUser(userMap, getApplicationContext());
+
+                    Map societyMap = Globals.society.toMapSociety();
+                    db.createNewSociety(societyMap, getApplicationContext(), new Db.societyCreated() {
+                        @Override
+                        public void societyCreated() {
+                            Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            SecretaryRegActivity.this.finish();
+                        }
+                    });
+                }
 
 
 

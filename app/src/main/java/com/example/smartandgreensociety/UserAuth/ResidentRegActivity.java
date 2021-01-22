@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.Globals;
@@ -40,17 +42,21 @@ public class ResidentRegActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Globals.user.setName(firebaseUser.getDisplayName());
-                Globals.user.setDesignation("Resident");
-                Globals.user.setEmail(firebaseUser.getEmail());
-                Globals.user.setUid(firebaseUser.getUid());
-                Globals.user.setPhone(userPhone.getText().toString().trim());
+                if(TextUtils.isEmpty(userPhone.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please Enter All Fields!",Toast.LENGTH_SHORT).show();
+                }else {
+                    Globals.user.setName(firebaseUser.getDisplayName());
+                    Globals.user.setDesignation("Resident");
+                    Globals.user.setEmail(firebaseUser.getEmail());
+                    Globals.user.setUid(firebaseUser.getUid());
+                    Globals.user.setPhone(userPhone.getText().toString().trim());
 
-                Map userMap = Globals.user.toMapResident();
+                    Map userMap = Globals.user.toMapResident();
 
-                db.createNewUser(userMap, getApplicationContext());
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                ResidentRegActivity.this.finish();
+                    db.createNewUser(userMap, getApplicationContext());
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    ResidentRegActivity.this.finish();
+                }
             }
         });
 

@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
@@ -38,10 +40,15 @@ public class UpdateRulRegActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String societyRules = etRulReg.getText().toString().trim();
-                db.addSocietyRules(societyRules);
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                UpdateRulRegActivity.this.finish();
+                if(TextUtils.isEmpty(etRulReg.getText().toString())){
+
+                    Toast.makeText(getApplicationContext(),"Please Enter All Fields",Toast.LENGTH_SHORT).show();
+                }else {
+                    String societyRules = etRulReg.getText().toString().trim();
+                    db.addSocietyRules(societyRules);
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    UpdateRulRegActivity.this.finish();
+                }
             }
         });
     }

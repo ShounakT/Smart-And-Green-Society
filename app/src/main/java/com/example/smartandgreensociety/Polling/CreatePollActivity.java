@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.smartandgreensociety.Database.Db;
 import com.example.smartandgreensociety.HomeActivity;
@@ -41,15 +43,19 @@ public class CreatePollActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String ques = etPollQuestion.getText().toString().trim();
-                List<String> options = new ArrayList<>();
+                if(TextUtils.isEmpty(etPollQuestion.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please Enter All Fields!",Toast.LENGTH_SHORT).show();
+                }else {
+                    String ques = etPollQuestion.getText().toString().trim();
+                    List<String> options = new ArrayList<>();
 
-                options.add("Yes");
-                options.add("No");
+                    options.add("Yes");
+                    options.add("No");
 
-                db.createPoll(ques,options);
-                startActivity(new Intent(CreatePollActivity.this, HomeActivity.class));
-                CreatePollActivity.this.finish();
+                    db.createPoll(ques, options);
+                    startActivity(new Intent(CreatePollActivity.this, HomeActivity.class));
+                    CreatePollActivity.this.finish();
+                }
             }
         });
     }
