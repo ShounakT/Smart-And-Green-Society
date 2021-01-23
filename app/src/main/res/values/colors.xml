@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="home_act_card_bg">#EF9A9A</color>
-    <color name="activity_bg">#FFFDE7</color>
+    <color name="home_act_card_bg">#FFAB40</color>
+    <color name="activity_bg">#FFFAE1</color>
     <color name="orange_200">#FFE0B2</color>
-    <color name="orange_500">#FF9800</color>
-    <color name="orange_700">#F57C00</color>
+    <color name="orange_500">#FFC107</color>
+    <color name="orange_700">#FFA000</color>
     <color name="yellow_200">#B2DFDB</color>
     <color name="yellow_700">#009688</color>
     <color name="black">#757575</color>
