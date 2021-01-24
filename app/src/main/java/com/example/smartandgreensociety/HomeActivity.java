@@ -78,57 +78,49 @@ public class HomeActivity extends AppCompatActivity {
             int id = item.getItemId();
             switch(id){
                 case R.id.profile:
-                    Toast.makeText(HomeActivity.this,"Welcome To Your Profile!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(),UserProfileActivity.class));
                     this.finish();
                     break;
 
                 case R.id.noticeBoard:
-                    Toast.makeText(HomeActivity.this,"Welcome To Notice Board!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), NoticeBoardActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyInfo:
-                    Toast.makeText(HomeActivity.this,"Welcome To Society Information!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), SocietyInfoActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyComplaints:
-                    Toast.makeText(HomeActivity.this,"Welcome To Complaint Section!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), SocietyComplaintActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyFeedback:
-                    Toast.makeText(HomeActivity.this,"Welcome To Feedback Section!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), SocietyFeedbackActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyRules:
-                    Toast.makeText(HomeActivity.this,"Welcome To Society Rules!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), SocietyRulesActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyAlert:
-                    Toast.makeText(HomeActivity.this,"Welcome To Alert Section!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), CreateAlertActivity.class));
                     this.finish();
                     break;
 
                 case R.id.societyPayment:
-                    Toast.makeText(HomeActivity.this,"Welcome To Payment Section!",
-                            Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), MakePaymentActivity.class));
                     this.finish();
                     break;
