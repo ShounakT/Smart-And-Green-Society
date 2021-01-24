@@ -11,12 +11,14 @@
     <EditText
 
         android:hint="Enter Notice Title Here"
+        android:inputType="text"
         android:id="@+id/etNoticeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
 
         android:hint="Enter Notice Content Here"
+        android:inputType="text"
         android:id="@+id/etNoticeContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

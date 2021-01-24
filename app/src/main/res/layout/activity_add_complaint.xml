@@ -10,12 +10,14 @@
 
     <EditText
         android:hint="Enter complaint title..."
+        android:inputType="text"
         android:id="@+id/etComplaintTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:hint="Enter complaint content..."
+        android:inputType="text"
         android:id="@+id/etComplaintContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -10,11 +10,13 @@
 
     <EditText
         android:hint="Enter your name here..."
+        android:inputType="text"
         android:id="@+id/etFeedbackTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:hint="Enter content here..."
+        android:inputType="text"
         android:id="@+id/etFeedbackContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
