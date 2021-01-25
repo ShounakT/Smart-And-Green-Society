@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     Db db = new Db();
     CardView btnAddResidents,btnCreatePoll, btnViewPolls, btnAddNotice, btnAddComplaint,
-            btnGiveFeedback, btnUpdateSocietyInfo, btnUpdateSocietyRules;;
+            btnGiveFeedback, btnUpdateSocietyInfo, btnUpdateSocietyRules;
 
 
     @Override

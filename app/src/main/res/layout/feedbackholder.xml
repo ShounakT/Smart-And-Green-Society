@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/activity_bg"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -8,21 +8,33 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/activity_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="#B9F6CA"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
             <TextView
                 android:text="Feedback 1."
+                android:textStyle="bold"
                 android:textSize="24sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
                 android:id="@+id/tvFeedbackHeading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:text="Feedback is regarding water shortage in the society. "
-                android:textSize="16sp"
+                android:textSize="32sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textStyle="italic"
                 android:id="@+id/tvFeedbackContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
