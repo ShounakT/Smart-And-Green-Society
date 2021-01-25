@@ -43,7 +43,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
         FirestoreRecyclerOptions<Notice> notice = db.getNoticeRecycler();
 
         ((RecyclerView)findViewById(R.id.notices))
-                .setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+                .setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
         adapter = new FirestoreRecyclerAdapter<Notice, NoticeBoardActivity.NoticeHolder>(notice) {
 
