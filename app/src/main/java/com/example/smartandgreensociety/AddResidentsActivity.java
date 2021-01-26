@@ -17,7 +17,7 @@ public class AddResidentsActivity extends AppCompatActivity {
     EditText etResidentEmail;
     Button btnAdd;
     Db db = new Db();
-
+    //hello
     @Override
     public boolean onSupportNavigateUp() {
         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
