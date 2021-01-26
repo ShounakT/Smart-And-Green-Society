@@ -9,13 +9,27 @@
     tools:context=".RulesAndRegulations.SocietyRulesActivity">
 
     <TextView
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textAllCaps="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Rules And Regulations Of Society:-"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:textSize="16sp"
         android:id="@+id/etSocietyRulesReg"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="wrap_content"/>
+    </ScrollView>
 
 </LinearLayout>

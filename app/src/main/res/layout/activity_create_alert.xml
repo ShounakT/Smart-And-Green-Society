@@ -1,20 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/activity_bg"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activity_bg"
+    android:foregroundTint="@color/activity_bg"
+    android:orientation="vertical"
     tools:context=".Alert.CreateAlertActivity">
 
+    <ImageView
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/activity_bg"
+        android:backgroundTint="@color/activity_bg"
+        android:foregroundTint="@color/activity_bg"
+        android:src="@drawable/alert_icon" />
+
+    <TextView
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="If there's any emergency in the society, please press the below button."
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Note*  After pressing the alert button, all the society members will receive the notification. "
+        android:textSize="16sp" />
 
     <Button
+
         android:id="@+id/btnNotify"
-        android:layout_marginTop="250dp"
-        android:text="Notify"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:text="Notify" />
 
 </LinearLayout>
