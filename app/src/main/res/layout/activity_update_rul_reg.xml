@@ -8,11 +8,20 @@
     android:layout_height="match_parent"
     tools:context=".RulesAndRegulations.UpdateRulRegActivity">
 
+    <TextView
+        android:text="Enter rules and regulations for the society..."
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <EditText
         android:inputType="text"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:id="@+id/etRulReg"
         android:hint="Enter your society rules..."
         android:layout_width="match_parent"

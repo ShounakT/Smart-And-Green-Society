@@ -8,21 +8,39 @@
     android:layout_height="match_parent"
     tools:context=".UserAuth.ResSecActivity">
 
-    <Button
-        android:id="@+id/btnRegAsResident"
-        android:text="Register As Resident"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="250dp"/>
+    <TextView
+        android:layout_marginTop="150dp"
+        android:text="Who Are You?"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnRegAsSecretary"
-        android:text="Register As Secretary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+    <LinearLayout
+        android:layout_marginTop="120dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnRegAsResident"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Resident"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp" />
+
+        <Button
+            android:id="@+id/btnRegAsSecretary"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Secretary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp" />
+    </LinearLayout>
+
 
 
 </LinearLayout>

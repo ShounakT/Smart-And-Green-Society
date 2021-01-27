@@ -7,8 +7,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Polling.CreatePollActivity">
-
+    <TextView
+        android:text="Hey Secretary, what's the poll for today?"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <EditText
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:id="@+id/etPollQuestion"
         android:inputType="text"
         android:hint="Enter the poll question."
@@ -17,6 +28,7 @@
     <Button
         android:layout_gravity="center_horizontal"
         android:id="@+id/btnConfirmPoll"
+        android:layout_marginTop="16dp"
         android:text="Create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

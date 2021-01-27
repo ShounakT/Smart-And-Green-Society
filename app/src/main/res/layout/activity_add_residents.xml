@@ -8,7 +8,28 @@
     android:layout_height="match_parent"
     tools:context=".AddResidentsActivity">
 
+    <TextView
+        android:text="Hey Secretary, you can add residents in your society from here."
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Note* : The resident to be added should have his/her account created."
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
     <EditText
+        android:layout_marginTop="80dp"
         android:layout_marginStart="16dp"
         android:inputType="textEmailAddress"
         android:layout_marginEnd="16dp"
