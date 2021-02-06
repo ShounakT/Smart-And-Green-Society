@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.smartandgreensociety.Database.Db;
+import com.example.smartandgreensociety.Globals;
 import com.example.smartandgreensociety.HomeActivity;
 import com.example.smartandgreensociety.R;
 
@@ -18,7 +19,7 @@ import java.util.Map;
 
 public class AddFeedbackActivity extends AppCompatActivity {
 
-    EditText etFeedbackTitle, etFeedbackContent;
+    EditText etFeedbackContent;
     Button btnAddFeedback;
     SocietyFeedback societyFeedback = new SocietyFeedback();
     Db db = new Db();
@@ -36,7 +37,6 @@ public class AddFeedbackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_feedback);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        etFeedbackTitle = findViewById(R.id.etFeedbackTitle);
         etFeedbackContent = findViewById(R.id.etFeedbackContent);
         btnAddFeedback = findViewById(R.id.btnAddFeedback);
 
@@ -44,13 +44,12 @@ public class AddFeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(TextUtils.isEmpty(etFeedbackTitle.getText().toString()) ||
-                        TextUtils.isEmpty(etFeedbackContent.getText().toString())){
+                if(TextUtils.isEmpty(etFeedbackContent.getText().toString())){
 
                     Toast.makeText(getApplicationContext(),"Please Enter All Fields!",Toast.LENGTH_SHORT).show();
 
                 }else {
-                    String feedbackTitle = etFeedbackTitle.getText().toString().trim();
+                    String feedbackTitle = Globals.user.getName();
                     String feedbackContent = etFeedbackContent.getText().toString().trim();
                     societyFeedback.setFeedbackHeading(feedbackTitle);
                     societyFeedback.setFeedbackContent(feedbackContent);
