@@ -19,16 +19,19 @@ import com.example.smartandgreensociety.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 public class NoticeBoardActivity extends AppCompatActivity {
 
     FirestoreRecyclerAdapter adapter;
+    DiscreteScrollView discreteScrollView;
     Db db = new Db();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_board);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        discreteScrollView = findViewById(R.id.notices);
     }
     @Override
     public boolean onSupportNavigateUp() {
@@ -42,8 +45,9 @@ public class NoticeBoardActivity extends AppCompatActivity {
 
         FirestoreRecyclerOptions<Notice> notice = db.getNoticeRecycler();
 
-        ((RecyclerView)findViewById(R.id.notices))
+        /*((RecyclerView)findViewById(R.id.notices))
                 .setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+*/
 
         adapter = new FirestoreRecyclerAdapter<Notice, NoticeBoardActivity.NoticeHolder>(notice) {
 
@@ -71,7 +75,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
         };
         adapter.notifyDataSetChanged();
         adapter.startListening();
-        ((RecyclerView)findViewById(R.id.notices)).setAdapter(adapter);
+        ((DiscreteScrollView)findViewById(R.id.notices)).setAdapter(adapter);
     }
     @Override
     protected void onStop() {

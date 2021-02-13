@@ -31,6 +31,9 @@
                 android:text="Notice 1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                 android:textColor="#444444"
                 android:text="This is the notice 1. A very important notice."
@@ -40,7 +43,7 @@
                 android:layout_marginRight="8dp"
                 android:id="@+id/tvNoticeContents"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"/></ScrollView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
