@@ -19,7 +19,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:textColor="#424242"
@@ -32,8 +33,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <ScrollView
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
             <TextView
                 android:textColor="#444444"
                 android:text="This is the notice 1. A very important notice."
@@ -43,7 +45,7 @@
                 android:layout_marginRight="8dp"
                 android:id="@+id/tvNoticeContents"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/></ScrollView>
+                android:layout_height="wrap_content"/></ScrollView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -11,7 +11,7 @@ import com.example.smartandgreensociety.UserAuth.LoginRegisterActivity;
 public class SplashActivity extends AppCompatActivity {
 
     Handler handler;
-    private static final int SPLASH_TME = 2000;
+    private static final int SPLASH_TME = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
