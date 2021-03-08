@@ -5,7 +5,7 @@ import com.example.smartandgreensociety.UserAuth.Society;
 import com.example.smartandgreensociety.UserAuth.User;
 
 public class Globals {
-    //Globals
+    //Globals For App
     public static boolean newUser = false;
     public static User user;
     public static Society society;
