@@ -11,6 +11,7 @@ import com.example.smartandgreensociety.UserAuth.LoginRegisterActivity;
 public class SplashActivity extends AppCompatActivity {
 
     Handler handler;
+    // Splash screen will be visible for 1.5 seconds
     private static final int SPLASH_TME = 1500;
 
     @Override
@@ -22,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                //After splash screen is shown, push user for authentication.
                 startActivity(new Intent(SplashActivity.this, LoginRegisterActivity.class));
                 SplashActivity.this.finish();
 

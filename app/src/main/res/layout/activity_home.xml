@@ -30,8 +30,10 @@
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="52dp"
                             app:cardBackgroundColor="@color/home_act_card_bg"
-                            app:cardCornerRadius="8dp"
+                            app:cardCornerRadius="5dp"
                             app:cardElevation="8dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -75,8 +77,10 @@
                         android:layout_marginStart="36dp"
                         android:layout_marginTop="52dp"
                         app:cardBackgroundColor="@color/home_act_card_bg"
-                        app:cardCornerRadius="8dp"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="8dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
 
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/btnAddResidents"
@@ -124,8 +128,10 @@
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="52dp"
                             app:cardBackgroundColor="@color/home_act_card_bg"
-                            app:cardCornerRadius="8dp"
+                            app:cardCornerRadius="5dp"
                             app:cardElevation="8dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/btnAddResidents">
 
@@ -168,8 +174,10 @@
                         android:layout_marginStart="36dp"
                         android:layout_marginTop="52dp"
                         app:cardBackgroundColor="@color/home_act_card_bg"
-                        app:cardCornerRadius="8dp"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="8dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
 
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/btnViewPolls"
@@ -217,8 +225,10 @@
                         android:layout_marginStart="36dp"
                         android:layout_marginTop="52dp"
                         app:cardBackgroundColor="@color/home_act_card_bg"
-                        app:cardCornerRadius="8dp"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="8dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         app:layout_constraintTop_toBottomOf="@id/btnViewPolls"
                         app:layout_constraintStart_toStartOf="parent">
 
@@ -261,8 +271,10 @@
                         android:layout_marginStart="36dp"
                         android:layout_marginTop="52dp"
                         app:cardBackgroundColor="@color/home_act_card_bg"
-                        app:cardCornerRadius="8dp"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="8dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/btnAddComplaint"
                         app:layout_constraintTop_toBottomOf="@id/btnAddNotice">
@@ -307,8 +319,10 @@
                         android:layout_marginStart="36dp"
                         android:layout_marginTop="52dp"
                         app:cardBackgroundColor="@color/home_act_card_bg"
-                        app:cardCornerRadius="8dp"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="8dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/btnAddComplaint">
 
@@ -353,8 +367,10 @@
                         android:layout_marginTop="52dp"
                         android:layout_marginBottom="52dp"
                         app:cardBackgroundColor="@color/home_act_card_bg"
-                        app:cardCornerRadius="8dp"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="8dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/btnUpdateSocietyInfo"

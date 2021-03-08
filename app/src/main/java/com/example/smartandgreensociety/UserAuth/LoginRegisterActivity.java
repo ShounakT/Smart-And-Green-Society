@@ -31,14 +31,14 @@ public class LoginRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
 
-
+        // Get the current user
         firebaseUser = firebaseAuth.getCurrentUser();
 
         List<AuthUI.IdpConfig> provider = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder()
                 .build());
 
         if(firebaseUser == null) {
-            // User Is Not Registered OR Registered, But Not Signed In
+            // User Is Not Registered OR Registered, but Not Signed In
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
                     .setAvailableProviders(provider)
                     .setTheme(R.style.Theme_SmartAndGreenSociety).setIsSmartLockEnabled(false)

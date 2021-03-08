@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:text="Note*  After pressing the alert button, all the society members will receive the notification. "
         android:textSize="16sp" />
 

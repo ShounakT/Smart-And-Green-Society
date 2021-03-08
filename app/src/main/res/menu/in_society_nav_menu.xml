@@ -10,7 +10,7 @@
         android:title="Notice Board" />
     <item android:id="@+id/societyInfo"
         android:icon="@drawable/society_info"
-        android:title="Society Info"/>
+        android:title="Society Information"/>
     <item android:id="@+id/societyRules"
         android:icon="@drawable/society_rules"
         android:title="Society Rules"/>
@@ -25,5 +25,5 @@
         android:title="Make Payment"/>
     <item android:id="@+id/societyAlert"
         android:icon="@drawable/society_alert"
-        android:title="Alert Society"/>
+        android:title="Emergency Alert"/>
 </menu>
