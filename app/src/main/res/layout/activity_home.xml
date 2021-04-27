@@ -9,6 +9,8 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+
+
         <ScrollView
             android:background="@color/activity_bg"
             android:layout_width="match_parent"
